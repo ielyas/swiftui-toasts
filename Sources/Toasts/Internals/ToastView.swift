@@ -5,15 +5,11 @@ import SwiftUI
 /// It enters as a glass circle (showing the icon, if any) and, once in place, the same capsule
 /// expands to reveal the message and button. Dismissal plays this in reverse.
 ///
-/// The message and the optional action button are separate glass capsules rather than a button
-/// nested inside the toast, so glass is never layered on glass. While hidden, the button is tucked
-/// inside the message capsule; the toast's own `GlassEffectContainer` fuses the overlapping glass,
-/// so the button visibly morphs out of the toast and back into it.
+/// The optional action button and close button sit inside the capsule as plain buttons rather than
+/// glass of their own, so the toast is a single piece of glass and glass is never layered on glass.
 ///
 /// A message too long for one line shows a chevron, and tapping the toast expands it to show the
 /// message in full.
-///
-/// A toast can also show a close button, inside the message capsule rather than as glass of its own.
 internal struct ToastView: View {
   @ObservedObject var model: ToastModel
   var onDismiss: () -> Void = {}
@@ -33,7 +29,13 @@ internal struct ToastView: View {
 
   @ScaledMetric(relativeTo: .callout) private var iconSize: CGFloat = 20
   @ScaledMetric(relativeTo: .callout) private var minHeight: CGFloat = 48
-  private let buttonGap: CGFloat = 8
+
+  /// The height of the action button's capsule and the close button's circle.
+  @ScaledMetric(relativeTo: .callout) private var buttonHeight: CGFloat = 32
+  /// How far a button sits from the toast's edge when it ends the toast; the same inset it has above
+  /// and below on one line, so its shape is concentric with the toast's.
+  private var buttonInset: CGFloat { (minHeight - buttonHeight) / 2 }
+  private var endsWithButton: Bool { model.button != nil || model.showsDismissButton }
 
   /// A capsule on one line, a circle when collapsed, and a rounded rectangle when the message wraps.
   private var messageShape: RoundedRectangle {
@@ -41,20 +43,8 @@ internal struct ToastView: View {
   }
 
   var body: some View {
-    // Container spacing matches the gap, so the glass stays fused while the button separates.
-    GlassEffectContainer(spacing: buttonGap) {
-      HStack(spacing: buttonGap) {
-        message
-        if let button = model.button {
-          ToastButtonView(
-            button: button,
-            isExpanded: model.isExpanded,
-            minHeight: minHeight,
-            gap: buttonGap,
-            namespace: namespace
-          )
-        }
-      }
+    GlassEffectContainer {
+      capsule
     }
     .font(.callout.weight(.medium))
     .sensoryFeedback(trigger: messageHaptic) { _, haptic in
@@ -62,6 +52,38 @@ internal struct ToastView: View {
     }
   }
 
+  private var capsule: some View {
+    HStack(alignment: .top, spacing: 10) {
+      message
+      if model.isExpanded {
+        if let button = model.button {
+          actionButton(button)
+            .transition(contentTransition)
+        }
+        if model.showsDismissButton {
+          dismissButton
+            .transition(contentTransition)
+        }
+      }
+    }
+    // Collapsed, the capsule is a circle: no padding, and at least as wide as it is tall.
+    .padding(.leading, model.isExpanded ? 16 : 0)
+    .padding(.trailing, model.isExpanded ? (endsWithButton ? buttonInset : 16) : 0)
+    .padding(.vertical, model.isMessageExpanded ? 14 : 0)
+    .frame(minWidth: minHeight, minHeight: minHeight)
+    // Keeps fading text from spilling outside the capsule while it shrinks.
+    .clipShape(messageShape)
+    // The whole toast, not just the chevron, expands and collapses the message.
+    .contentShape(messageShape)
+    .onTapGesture(perform: toggleMessageExpansion)
+    .glassEffect(.regular.interactive(), in: messageShape)
+    .glassEffectID(ToastGlassID.message, in: namespace)
+    // A new toast appears in place rather than morphing out of other glass.
+    .glassEffectTransition(.materialize)
+  }
+
+  /// The icon and message, which VoiceOver reads as one element that also expands the message
+  /// and dismisses the toast.
   private var message: some View {
     HStack(alignment: .top, spacing: 10) {
       if let icon = model.icon {
@@ -72,21 +94,8 @@ internal struct ToastView: View {
         messageText
           .id(model.message)
           .transition(contentTransition)
-        if model.showsDismissButton {
-          dismissButton
-            .transition(contentTransition)
-        }
       }
     }
-    // Collapsed, the capsule is a circle: no padding, and at least as wide as it is tall.
-    .padding(.horizontal, model.isExpanded ? 16 : 0)
-    .padding(.vertical, model.isMessageExpanded ? 14 : 0)
-    .frame(minWidth: minHeight, minHeight: minHeight)
-    // Keeps fading text from spilling outside the capsule while it shrinks.
-    .clipShape(messageShape)
-    // The whole toast, not just the chevron, expands and collapses the message.
-    .contentShape(messageShape)
-    .onTapGesture(perform: toggleMessageExpansion)
     .accessibilityElement(children: .combine)
     .accessibilityAddTraits(isMessageExpandable ? .isButton : [])
     .accessibilityHint(
@@ -103,10 +112,6 @@ internal struct ToastView: View {
     .accessibilityAction(.escape) {
       if model.showsDismissButton { onDismiss() }
     }
-    .glassEffect(.regular.interactive(), in: messageShape)
-    .glassEffectID(ToastGlassID.message, in: namespace)
-    // A new toast appears in place rather than morphing out of other glass.
-    .glassEffectTransition(.materialize)
   }
 
   /// Content fades in once the circle has started expanding, and out before it collapses.
@@ -117,20 +122,46 @@ internal struct ToastView: View {
     )
   }
 
-  /// A close button at the trailing end of the message. VoiceOver reaches it as the toast's
-  /// Dismiss action instead.
+  /// The action button, a small capsule tinted with the button's color inside the toast. It's a
+  /// translucent fill rather than glass, so glass is never layered on glass. Its title never
+  /// truncates; the message gives way instead.
+  private func actionButton(_ button: ToastButton) -> some View {
+    Button(action: button.action) {
+      Text(button.title)
+        .fontWeight(.semibold)
+        .foregroundStyle(button.color)
+        .fixedSize()
+        .padding(.horizontal, 12)
+        .frame(minHeight: buttonHeight)
+        .background(button.color.opacity(0.15), in: .capsule)
+        // A touch target as tall as the toast, without making it taller.
+        .padding(.vertical, buttonInset)
+        .contentShape(.rect)
+        .padding(.vertical, -buttonInset)
+    }
+    .buttonStyle(.plain)
+    // Centers the capsule on the message's first line, which the icon's frame matches.
+    .alignmentGuide(.top) { $0[.top] + ($0.height - iconSize) / 2 }
+    .padding(.leading, 2)
+  }
+
+  /// A close button in a small circle at the trailing end of the toast, filled like the action
+  /// button's capsule but untinted. VoiceOver reaches it as the toast's Dismiss action instead.
   private var dismissButton: some View {
     Button(action: onDismiss) {
       Image(systemName: "xmark")
         .font(.footnote.weight(.semibold))
         .foregroundStyle(.secondary)
-        .frame(width: iconSize, height: iconSize)
-        // A comfortable touch target around the small glyph, without widening the toast.
-        .padding(12)
+        .frame(width: buttonHeight, height: buttonHeight)
+        .background(Color.primary.opacity(0.08), in: .circle)
+        // A touch target as tall as the toast, without making it taller.
+        .padding(.vertical, buttonInset)
         .contentShape(.rect)
-        .padding(-12)
+        .padding(.vertical, -buttonInset)
     }
     .buttonStyle(.plain)
+    // Centers the circle on the message's first line, like the action button.
+    .alignmentGuide(.top) { $0[.top] + ($0.height - iconSize) / 2 }
     .accessibilityHidden(true)
   }
 
@@ -193,52 +224,8 @@ internal struct ToastView: View {
   }
 }
 
-/// The action button's glass capsule. Hidden, it's a circle tucked inside the trailing end of the
-/// message capsule; revealed, it slides out and widens to fit its title.
-private struct ToastButtonView: View {
-  let button: ToastButton
-  let isExpanded: Bool
-  let minHeight: CGFloat
-  let gap: CGFloat
-  let namespace: Namespace.ID
-
-  /// False until first shown, so a button that arrives later (e.g. when a loading toast resolves)
-  /// starts tucked in and morphs out rather than just appearing.
-  @State private var hasAppeared = false
-
-  private var isRevealed: Bool { isExpanded && hasAppeared }
-
-  var body: some View {
-    Button(action: button.action) {
-      Text(button.title)
-        .fixedSize()
-        .foregroundStyle(button.color)
-        .opacity(isRevealed ? 1 : 0)
-        // The title shows once the button has moved clear of the toast, and hides before it tucks back in.
-        .animation(isRevealed ? .easeOut(duration: 0.2).delay(0.15) : nil, value: isRevealed)
-        .padding(.horizontal, isRevealed ? 16 : 0)
-        .frame(width: isRevealed ? nil : minHeight)
-        .frame(minHeight: minHeight)
-        .contentShape(.capsule)
-    }
-    .buttonStyle(.plain)
-    .clipShape(.capsule)
-    .glassEffect(.regular.interactive(), in: .capsule)
-    .glassEffectID(ToastGlassID.button, in: namespace)
-    // Pulls the hidden button back over the message capsule's trailing end.
-    .padding(.leading, isRevealed ? 0 : -(minHeight + gap))
-    .allowsHitTesting(isRevealed)
-    .accessibilityHidden(!isRevealed)
-    .onAppear {
-      withAnimation(morphAnimation) {
-        hasAppeared = true
-      }
-    }
-  }
-}
-
 private enum ToastGlassID: Hashable, Sendable {
-  case message, button
+  case message
 }
 
 #Preview {
