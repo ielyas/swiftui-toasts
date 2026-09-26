@@ -23,6 +23,8 @@ internal struct ToastRootView: View {
       let models = isTop ? manager.models.reversed() : manager.models
       ForEach(manager.isAppeared ? models : []) { model in
         ToastInteractingView(model: model, manager: manager)
+          // Keeps toasts readable on wide screens like iPad instead of spanning the whole width.
+          .frame(maxWidth: maxToastWidth)
           .transition(transition(isTop: isTop))
       }
 
@@ -50,6 +52,8 @@ internal struct ToastRootView: View {
     )
   }
 }
+
+private let maxToastWidth: CGFloat = 500
 
 private struct Tuple: Equatable {
   var count: Int
