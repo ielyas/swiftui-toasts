@@ -22,7 +22,7 @@ Add the package in Xcode (**File → Add Package Dependencies…**) or in `Packa
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/ielyas/swiftui-toasts.git", from: "2.0.0")
+  .package(url: "https://github.com/ielyas/swiftui-toasts.git", from: "2.1.0")
 ]
 ```
 
@@ -42,7 +42,7 @@ Then add the `Toasts` product to your target.
 - Haptic feedback for info, success, warning, and error toasts, timed with the toast's appearance
 - Slide gesture to dismiss, an optional close button, and `dismissToast` to dismiss from code
 - Loading state interface with async/await
-- Full VoiceOver compatibility for inclusive user experience
+- Full VoiceOver compatibility, with its hints and actions in English and Arabic
 
 ## Usage
 

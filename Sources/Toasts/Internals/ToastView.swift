@@ -98,20 +98,26 @@ internal struct ToastView: View {
     }
     .accessibilityElement(children: .combine)
     .accessibilityAddTraits(isMessageExpandable ? .isButton : [])
-    .accessibilityHint(
-      isMessageExpandable ? (model.isMessageExpanded ? "Shows less" : "Shows the full message") : ""
-    )
+    .accessibilityHint(messageHint)
     .accessibilityAction {
       toggleMessageExpansion()
     }
     .accessibilityActions {
       if model.showsDismissButton {
-        Button("Dismiss", action: onDismiss)
+        Button(String(localized: "Dismiss", bundle: .module, comment: "VoiceOver action that dismisses the toast"), action: onDismiss)
       }
     }
     .accessibilityAction(.escape) {
       if model.showsDismissButton { onDismiss() }
     }
+  }
+
+  /// VoiceOver's hint for a message that can expand or collapse.
+  private var messageHint: Text {
+    guard isMessageExpandable else { return Text(verbatim: "") }
+    return model.isMessageExpanded
+      ? Text("Shows less", bundle: .module, comment: "VoiceOver hint for collapsing an expanded toast message")
+      : Text("Shows the full message", bundle: .module, comment: "VoiceOver hint for expanding a truncated toast message")
   }
 
   /// Content fades in once the circle has started expanding, and out before it collapses.
