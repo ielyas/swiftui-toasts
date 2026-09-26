@@ -113,7 +113,7 @@ internal final class ToastManager: ObservableObject {
 
 internal let removalAnimationDuration: Double = 0.3
 /// After an expanded message is collapsed, the toast dismisses this long after.
-internal let collapsedMessageDismissDelay: TimeInterval = 1
+internal let collapsedMessageDismissDelay: TimeInterval = 2
 /// Duration of the circle ⇄ capsule morph.
 internal let morphAnimationDuration: Double = 0.35
 internal let morphAnimation: Animation = .spring(duration: morphAnimationDuration, bounce: 0.2)

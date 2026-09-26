@@ -98,7 +98,7 @@ final class ToastManagerTests: XCTestCase {
     XCTAssertEqual(manager.dismissDelay(for: model), 8)
 
     model.hasCollapsedMessage = true
-    XCTAssertEqual(manager.dismissDelay(for: model), 1)
+    XCTAssertEqual(manager.dismissDelay(for: model), 2)
 
     let loading = manager.append(ToastValue(message: "Loading", duration: nil))
     loading.hasCollapsedMessage = true
