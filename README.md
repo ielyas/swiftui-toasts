@@ -63,8 +63,8 @@ struct MyApp: App {
 }
 ```
 
-Toasts appear at the top, just below the status bar or Dynamic Island. Pass `position: .bottom` to show them at the
-bottom instead.
+On iPhone, toasts appear at the top, just below the status bar or Dynamic Island. On iPad, they appear at the bottom.
+Pass `position: .top` or `position: .bottom` to use the same position everywhere.
 
 2. Present a toast:
 

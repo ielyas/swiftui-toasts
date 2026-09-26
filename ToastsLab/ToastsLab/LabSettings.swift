@@ -5,7 +5,7 @@ import Toasts
 @MainActor
 @Observable
 final class LabSettings {
-  var position: ToastPosition = .top
+  var position: ToastPosition = .default
   var appearance: Appearance = .system
   /// Starts in the direction of the language the app runs in, e.g. right-to-left in Arabic.
   var rightToLeft =
