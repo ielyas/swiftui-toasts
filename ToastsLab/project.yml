@@ -1,6 +1,7 @@
 name: ToastsLab
 options:
   bundleIdPrefix: com.example
+  developmentLanguage: en
   deploymentTarget:
     iOS: "26.0"
 packages:
@@ -20,6 +21,8 @@ targets:
     settings:
       base:
         SWIFT_VERSION: "6.0"
+        LOCALIZATION_PREFERS_STRING_CATALOGS: YES
+        SWIFT_EMIT_LOC_STRINGS: YES
         CODE_SIGN_STYLE: Automatic
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_CFBundleDisplayName: Toasts Lab

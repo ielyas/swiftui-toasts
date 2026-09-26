@@ -2,8 +2,8 @@ import SwiftUI
 
 /// A tappable list row with a title and a short explanation of what it tests.
 struct DemoRow: View {
-  let title: String
-  var detail: String? = nil
+  let title: LocalizedStringKey
+  var detail: LocalizedStringKey? = nil
   var systemImage: String = "sparkles"
   let action: () -> Void
 
@@ -72,7 +72,7 @@ enum LabError: LocalizedError {
 
   var errorDescription: String? {
     switch self {
-    case .network: "Network connection lost"
+    case .network: String(localized: "Network connection lost")
     }
   }
 }

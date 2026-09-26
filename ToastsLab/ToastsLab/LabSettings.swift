@@ -7,7 +7,9 @@ import Toasts
 final class LabSettings {
   var position: ToastPosition = .bottom
   var appearance: Appearance = .system
-  var rightToLeft = false
+  /// Starts in the direction of the language the app runs in, e.g. right-to-left in Arabic.
+  var rightToLeft =
+    Locale.Language(identifier: Bundle.main.preferredLocalizations.first ?? "en").characterDirection == .rightToLeft
   var dynamicTypeSize: DynamicTypeSize = .large
   var showsTabBar = true
   var observesSafeArea = true
@@ -17,6 +19,14 @@ enum Appearance: String, CaseIterable, Identifiable {
   case system, light, dark
 
   var id: Self { self }
+
+  var title: LocalizedStringKey {
+    switch self {
+    case .system: "System"
+    case .light: "Light"
+    case .dark: "Dark"
+    }
+  }
 
   var colorScheme: ColorScheme? {
     switch self {

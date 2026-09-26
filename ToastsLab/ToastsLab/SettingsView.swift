@@ -17,27 +17,29 @@ struct SettingsView: View {
           }
           .pickerStyle(.segmented)
         } header: {
-          Text("installToast(position:)")
+          Text(verbatim: "installToast(position:)")
         } footer: {
           Text("Changing the position while toasts are visible moves them live.")
         }
 
         Section("Appearance") {
           Picker("Theme", selection: $settings.appearance) {
-            ForEach(Appearance.allCases) { Text($0.rawValue.capitalized).tag($0) }
+            ForEach(Appearance.allCases) { Text($0.title).tag($0) }
           }
           .pickerStyle(.segmented)
           Toggle("Right-to-left layout", isOn: $settings.rightToLeft)
           Picker("Text size", selection: $settings.dynamicTypeSize) {
             ForEach(DynamicTypeSize.allCases, id: \.self) { size in
-              Text(String(describing: size)).tag(size)
+              Text(verbatim: String(describing: size)).tag(size)
             }
           }
         }
 
         Section {
           Toggle("Show tab bar", isOn: $settings.showsTabBar)
-          Toggle("addToastSafeAreaObserver()", isOn: $settings.observesSafeArea)
+          Toggle(isOn: $settings.observesSafeArea) {
+            Text(verbatim: "addToastSafeAreaObserver()")
+          }
         } header: {
           Text("Safe area")
         } footer: {
@@ -51,12 +53,13 @@ struct SettingsView: View {
             presentToast(
               ToastValue(
                 icon: Image(systemName: "bell"),
-                message: "Position: \(settings.position == .top ? "top" : "bottom")",
-                button: ToastButton(title: "OK") {}
+                message: settings.position == .top
+                  ? String(localized: "Position: top") : String(localized: "Position: bottom"),
+                button: ToastButton(title: String(localized: "OK")) {}
               ))
           }
           DemoRow(title: "Toast, then flip position", detail: "Watch the stack move", systemImage: "arrow.up.arrow.down") {
-            presentToast(ToastValue(icon: Image(systemName: "arrow.up.arrow.down"), message: "Moving…", duration: 5))
+            presentToast(ToastValue(icon: Image(systemName: "arrow.up.arrow.down"), message: String(localized: "Moving…"), duration: 5))
             Task {
               try? await Task.sleep(for: .seconds(1))
               settings.position = settings.position == .top ? .bottom : .top

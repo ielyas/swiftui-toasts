@@ -32,7 +32,7 @@ struct GlassBackdropView: View {
     .toolbar {
       ToolbarItem(placement: .bottomBar) {
         Button("Toast", systemImage: "bell") {
-          presentToast(ToastValue(icon: Image(systemName: "bell"), message: "Glass over color"))
+          presentToast(ToastValue(icon: Image(systemName: "bell"), message: String(localized: "Glass over color")))
         }
       }
       ToolbarItem(placement: .bottomBar) {
@@ -40,8 +40,8 @@ struct GlassBackdropView: View {
           presentToast(
             ToastValue(
               icon: Image(systemName: "trash"),
-              message: "Photo deleted",
-              button: ToastButton(title: "Undo", color: .red) {}
+              message: String(localized: "Photo deleted"),
+              button: ToastButton(title: String(localized: "Undo"), color: .red) {}
             ))
         }
       }
@@ -49,14 +49,14 @@ struct GlassBackdropView: View {
         Button("Loading", systemImage: "arrow.triangle.2.circlepath") {
           Task {
             try? await presentToast(
-              message: "Uploading…",
+              message: String(localized: "Uploading…"),
               task: { try await simulateWork(seconds: 2, returning: ()) },
               onSuccess: {
                 ToastValue(
                   icon: Image(systemName: "checkmark.circle"),
-                  message: "Uploaded",
+                  message: String(localized: "Uploaded"),
                   kind: .success,
-                  button: ToastButton(title: "View", color: .blue) {}
+                  button: ToastButton(title: String(localized: "View"), color: .blue) {}
                 )
               },
               onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
