@@ -614,7 +614,7 @@
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "اكتمل"
+            "value" : "تم"
           }
         }
       }
@@ -675,6 +675,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "أيقونة إيموجي"
+          }
+        }
+      }
+    },
+    "Empty message" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رسالة فارغة"
           }
         }
       }
