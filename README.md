@@ -22,7 +22,7 @@ Add the package in Xcode (**File → Add Package Dependencies…**) or in `Packa
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/ielyas/swiftui-toasts.git", branch: "main")
+  .package(url: "https://github.com/ielyas/swiftui-toasts.git", from: "2.0.0")
 ]
 ```
 
