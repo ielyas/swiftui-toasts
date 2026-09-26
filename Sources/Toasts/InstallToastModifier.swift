@@ -1,5 +1,4 @@
 import SwiftUI
-import WindowOverlay
 
 extension View {
   /// Installs the toast presentation system on this view.
@@ -24,10 +23,10 @@ private struct InstallToastModifier: ViewModifier {
         \.presentToast,
         PresentToastAction(manager: manager)
       )
-      ._background {
+      .background {
         InstallToastView(manager: manager)
       }
-      ._onChange(of: position, initial: true) {
+      .onChange(of: position, initial: true) {
         manager.position = $1
       }
       .addToastSafeAreaObserver()
@@ -40,10 +39,12 @@ private struct InstallToastModifier: ViewModifier {
 private struct InstallToastView: View {
   @ObservedObject var manager: ToastManager
   var body: some View {
-    Color.clear
-      .windowOverlay(isPresented: manager.isPresented, disableSafeArea: true) {
-        ToastRootView(manager: manager)
-      }
+    ToastWindowPresenter(
+      manager: manager,
+      isPresented: manager.isPresented,
+      content: ToastRootView(manager: manager)
+    )
+    .allowsHitTesting(false)
   }
 }
 
@@ -52,7 +53,7 @@ extension View {
   ///
   /// This is an internal helper method used by the toast system.
   public func addToastSafeAreaObserver() -> some View {
-    self._background {
+    self.background {
       GeometryReader { geometry in
         Color.clear
           .preference(key: SafeAreaInsetsPreferenceKey.self, value: geometry.safeAreaInsets)

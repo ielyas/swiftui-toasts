@@ -56,13 +56,73 @@ final class ToastManagerTests: XCTestCase {
     XCTAssertTrue(manager.models.isEmpty)
   }
   
+  func testDismissCollapsesThenRemoves() async {
+    let manager = ToastManager()
+    let model = manager.append(ToastValue(message: "Test Message"))
+    model.isExpanded = true
+
+    await manager.dismiss(model)
+
+    XCTAssertFalse(model.isExpanded)
+    XCTAssertTrue(manager.models.isEmpty)
+  }
+
+
+  func testDismissIsIdempotent() async {
+    let manager = ToastManager()
+    let model = manager.append(ToastValue(message: "Test Message"))
+    let other = manager.append(ToastValue(message: "Other"))
+
+    async let first: Void = manager.dismiss(model)
+    async let second: Void = manager.dismiss(model)
+    _ = await (first, second)
+
+    XCTAssertEqual(manager.models.count, 1)
+    XCTAssertTrue(manager.models.first === other)
+  }
+
+  func testExpandedMessageIsNotDismissedByTimer() async {
+    let manager = ToastManager()
+    let model = manager.append(ToastValue(message: "A long message", duration: 0.1))
+    model.isExpanded = true
+    model.isMessageExpanded = true
+
+    await manager.startRemovalTask(for: model)
+
+    XCTAssertEqual(manager.models.count, 1)
+  }
+
+  func testDismissCollapsesExpandedMessage() async {
+    let manager = ToastManager()
+    let model = manager.append(ToastValue(message: "A long message"))
+    model.isExpanded = true
+    model.isMessageExpanded = true
+
+    await manager.dismiss(model)
+
+    XCTAssertFalse(model.isMessageExpanded)
+    XCTAssertTrue(manager.models.isEmpty)
+  }
+
+  func testHitTestingFollowsToastFrames() {
+    let manager = ToastManager()
+    let model = manager.append(ToastValue(message: "Test Message"))
+    manager.setFrame(CGRect(x: 20, y: 700, width: 300, height: 48), for: model)
+
+    XCTAssertTrue(manager.containsToast(at: CGPoint(x: 100, y: 720)))
+    XCTAssertFalse(manager.containsToast(at: CGPoint(x: 100, y: 400)))
+
+    manager.remove(model)
+    XCTAssertFalse(manager.containsToast(at: CGPoint(x: 100, y: 720)))
+  }
+
   func testAppendWithTask() async throws {
     let manager = ToastManager()
     
     let result = try await manager.append(
       message: "Loading...",
       task: {
-        try await Task.sleep(seconds: 0.1)
+        try await Task.sleep(for: .seconds(0.1))
         return "Success"
       },
       onSuccess: { result in
@@ -85,7 +145,7 @@ final class ToastManagerTests: XCTestCase {
       try await manager.append(
         message: "Loading...",
         task: {
-          try await Task.sleep(seconds: 0.1)
+          try await Task.sleep(for: .seconds(0.1))
           throw NSError(domain: "", code: 0)
         },
         onSuccess: { result in

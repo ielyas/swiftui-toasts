@@ -71,12 +71,12 @@ struct ContentView: View {
   }
 
   private func loadSucceess() async -> String {
-    try? await Task.sleep(seconds: 1)
+    try? await Task.sleep(for: .seconds(1))
     return "Success"
   }
 
   private func loadFailure() async throws -> String {
-    try await Task.sleep(seconds: 1)
+    try await Task.sleep(for: .seconds(1))
     throw NSError(domain: "Error", code: 1)
   }
 }

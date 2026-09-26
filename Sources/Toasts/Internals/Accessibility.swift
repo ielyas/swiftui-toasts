@@ -9,11 +9,9 @@ func announceToAccessibility(_ message: String) {
 }
 
 private func createAttributedAccessibilityMessage(_ message: String) -> NSAttributedString {
-  var attributes: [NSAttributedString.Key: Any] = [
-    .accessibilitySpeechQueueAnnouncement: false
+  let attributes: [NSAttributedString.Key: Any] = [
+    .accessibilitySpeechQueueAnnouncement: false,
+    .accessibilitySpeechAnnouncementPriority: UIAccessibilityPriority.high.rawValue,
   ]
-  if #available(iOS 17.0, *) {
-    attributes[.accessibilitySpeechAnnouncementPriority] = UIAccessibilityPriority.high.rawValue
-  }
   return NSAttributedString(string: message, attributes: attributes)
 }

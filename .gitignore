@@ -9,3 +9,4 @@ DerivedData/
 .swiftpm/
 buildServer.json
 /ToastsExampleApp.swiftpm/.build
+/ToastsLab/*.xcodeproj

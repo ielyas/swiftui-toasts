@@ -1,6 +1,9 @@
 # Toasts
 
-A toast notification library for SwiftUI.
+A toast notification library for SwiftUI, built entirely on **Liquid Glass**.
+
+> This is a fork of [sunghyun-k/swiftui-toasts](https://github.com/sunghyun-k/swiftui-toasts) that drops the custom
+> background and legacy OS support in favor of the system Liquid Glass material. It requires iOS 26 or later.
 
 ![Simulator Screen Recording - iPhone 15 Pro - 2024-09-16 at 11 53 37](https://github.com/user-attachments/assets/7b11b2f1-ed6e-4955-a674-c3bfd49ab8ad)
 
@@ -11,9 +14,14 @@ A toast notification library for SwiftUI.
 ## Features
 
 - Easy-to-use toast notifications
+- Liquid Glass capsules that blur and reflect the content behind them
+- Action buttons as their own glass capsule (no glass on glass) that morph out of the toast
 - Support for custom icons, messages, and buttons
+- Long messages get a chevron to expand the toast and read them in full; an expanded toast stays until it's collapsed
+  or swiped away
 - Seamless integration with SwiftUI
-- Dark mode support
+- Adapts automatically to light and dark mode, Reduce Transparency, and Increase Contrast
+- Dynamic Type and Reduce Motion support
 - Slide gesture to dismiss
 - Loading state interface with async/await
 - Full VoiceOver compatibility for inclusive user experience
@@ -69,6 +77,20 @@ presentToast(
 )
 ```
 
+## Liquid Glass design
+
+Toasts follow Apple's [Liquid Glass guidance](https://developer.apple.com/documentation/SwiftUI/Applying-Liquid-Glass-to-custom-views):
+
+- Each toast is a capsule with `.glassEffect(.regular.interactive())`, so it reacts to touch while you swipe it away.
+- A toast slides in as a glass circle (showing its icon), then expands into the full capsule. When it's dismissed, by
+  timer or swipe, it collapses back into the circle before leaving. With Reduce Motion on, toasts simply fade.
+- An action button is a separate glass capsule beside the message, never glass nested inside glass.
+- Each toast has its own `GlassEffectContainer` with a `glassEffectID` per capsule, so when a loading toast resolves
+  into one with a button, the button morphs out of that toast. New toasts use the `.materialize` transition, so they
+  appear in place instead of morphing out of neighbouring toasts.
+- Glass stays untinted. `ToastButton.color` colors the button's label, which keeps tint for meaning.
+- The loading indicator is the system `ProgressView`.
+
 ## Customization
 
 <img width="356" alt="image" src="https://github.com/user-attachments/assets/937ef007-cbe7-4462-963c-2fb92a6cd844">
@@ -120,6 +142,18 @@ This modifier helps the toast system correctly detect and respond to safe area c
 
 ## Requirements
 
-- iOS 14.0+
-- Swift 6.1+
-- Xcode 16.4+
+- iOS 26.0+
+- Swift 6.2+
+- Xcode 26+
+
+## Toasts Lab
+
+`ToastsLab/` is a test app that exercises every variation: content, buttons, durations, loading states, stacking,
+sheets, keyboard, multiple hosts, a colorful glass backdrop, and live settings for position, appearance, RTL, and
+Dynamic Type. Generate the project with [XcodeGen](https://github.com/yonaskolb/XcodeGen):
+
+```sh
+cd ToastsLab && xcodegen generate && open ToastsLab.xcodeproj
+```
+
+Launch with the `-autoplay` argument to present a sample of every toast shape without tapping.

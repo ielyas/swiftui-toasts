@@ -5,28 +5,60 @@ internal struct ToastInteractingView: View {
   @ObservedObject var model: ToastModel
   let manager: ToastManager
   @GestureState private var yOffset: CGFloat?
-  @State private var dismissTask: Task<Void, any Error>?
+  @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
   private var isDragging: Bool { yOffset != nil }
 
+  /// Everything the auto-dismiss timer depends on. The timer runs while the toast has a duration
+  /// and is neither being dragged nor showing its full message, and restarts from the beginning
+  /// whenever any of these change (e.g. after a drag ends or the message is collapsed).
+  private var dismissTimer: DismissTimer {
+    DismissTimer(
+      duration: model.duration,
+      isPaused: isDragging || model.isMessageExpanded
+    )
+  }
+
   var body: some View {
     main
-      ._onChange(of: isDragging) { _, newValue in
-        if newValue {
-          dismissTask?.cancel()
-          dismissTask = nil
-        }
+      .task(id: dismissTimer) {
+        guard !dismissTimer.isPaused else { return }
+        await manager.startRemovalTask(for: model)
       }
-      ._onChange(of: model.duration == nil, initial: true) { _, newValue in
-        startDismissTask()
-      }
+      .task { await expand() }
+  }
+
+  /// Lets the circle finish sliding in, then morphs it into the full toast.
+  private func expand() async {
+    guard !model.isExpanded, !model.isDismissing else { return }
+    if reduceMotion {
+      model.isExpanded = true
+      return
+    }
+    do {
+      try await Task.sleep(for: .seconds(removalAnimationDuration))
+    } catch {
+      return
+    }
+    guard !model.isDismissing else { return }
+    withAnimation(morphAnimation) {
+      model.isExpanded = true
+    }
   }
 
   @MainActor
   private var main: some View {
     ToastView(model: model)
+      // Measured inside the offset, so the frame follows the toast while it's dragged.
+      .onGeometryChange(for: CGRect.self, of: { $0.frame(in: .global) }) { frame in
+        manager.setFrame(frame, for: model)
+      }
+      .onDisappear {
+        manager.setFrame(nil, for: model)
+      }
       .offset(y: yOffset ?? 0)
-      .gesture(dragGesture)
+      // Simultaneous, so tapping the toast to expand its message never blocks swiping it away.
+      .simultaneousGesture(dragGesture)
       .animation(.spring, value: isDragging)
   }
 
@@ -48,17 +80,13 @@ internal struct ToastInteractingView: View {
         let threshold: CGFloat = 48 / 2
         let draggedAmount = manager.position == .top ? -value.translation.height : value.translation.height
         if draggedAmount > threshold {
-          manager.remove(model)
-        } else {
-          startDismissTask()
+          Task { await manager.dismiss(model) }
         }
       }
   }
+}
 
-  private func startDismissTask() {
-    dismissTask?.cancel()
-    dismissTask = Task {
-      await manager.startRemovalTask(for: model)
-    }
-  }
+private struct DismissTimer: Equatable {
+  var duration: TimeInterval?
+  var isPaused: Bool
 }
