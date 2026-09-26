@@ -64,14 +64,14 @@ struct ContextsView: View {
       .labScreen()
     }
     .sheet(isPresented: $showsSheet) {
-      ModalDemo(title: "Sheet")
+      ModalDemo(title: String(localized: "Sheet"))
         .presentationDetents([.medium, .large])
     }
     .fullScreenCover(isPresented: $showsCover) {
-      ModalDemo(title: "Full-screen cover")
+      ModalDemo(title: String(localized: "Full-screen cover"))
     }
     .sheet(isPresented: $showsNestedInstall) {
-      ModalDemo(title: "Nested host (top)")
+      ModalDemo(title: String(localized: "Nested host (top)"))
         .installToast(position: .top)
     }
   }
@@ -86,18 +86,18 @@ private struct ModalDemo: View {
     NavigationStack {
       List {
         DemoRow(title: "Present toast", systemImage: "bell") {
-          presentToast(ToastValue(icon: Image(systemName: "bell"), message: "Hello from \(title)"))
+          presentToast(ToastValue(icon: Image(systemName: "bell"), message: String(localized: "Hello from \(title)")))
         }
         DemoRow(title: "Present, then dismiss", detail: "Toast outlives the modal", systemImage: "xmark.square") {
-          presentToast(ToastValue(icon: Image(systemName: "checkmark.circle"), message: "Closed \(title)", kind: .success))
+          presentToast(ToastValue(icon: Image(systemName: "checkmark.circle"), message: String(localized: "Closed \(title)"), kind: .success))
           dismiss()
         }
         DemoRow(title: "Loading, then dismiss", detail: "Task keeps running after the modal closes", systemImage: "arrow.triangle.2.circlepath") {
           Task {
             try? await presentToast(
-              message: "Saving…",
+              message: String(localized: "Saving…"),
               task: { try await simulateWork(seconds: 2, returning: ()) },
-              onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: "Saved", kind: .success) },
+              onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: String(localized: "Saved"), kind: .success) },
               onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
             )
           }
@@ -119,7 +119,7 @@ private struct PushedView: View {
   var body: some View {
     List {
       DemoRow(title: "Present toast", systemImage: "bell") {
-        presentToast(ToastValue(icon: Image(systemName: "bell"), message: "Hello from a pushed screen"))
+        presentToast(ToastValue(icon: Image(systemName: "bell"), message: String(localized: "Hello from a pushed screen")))
       }
     }
     .navigationTitle("Pushed")

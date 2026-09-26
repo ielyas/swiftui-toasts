@@ -71,31 +71,31 @@ private struct AutoplayModifier: ViewModifier {
     content.task {
       guard LaunchOptions.isAutoplay else { return }
       try? await Task.sleep(for: .seconds(1))
-      presentToast(ToastValue(message: "Message only", duration: 10))
+      presentToast(ToastValue(message: String(localized: "Message only"), duration: 10))
       presentToast(
         ToastValue(
           icon: Image(systemName: "doc.text"),
-          message: "This is a very long toast message that will certainly not fit on a single line of the screen.",
+          message: String(localized: "This is a very long toast message that will certainly not fit on a single line of the screen."),
           showsDismissButton: true,
           duration: 10
         ))
-      presentToast(ToastValue(icon: Image(systemName: "bell"), message: "You have a new notification.", duration: 10))
+      presentToast(ToastValue(icon: Image(systemName: "bell"), message: String(localized: "You have a new notification."), duration: 10))
       presentToast(
         ToastValue(
           icon: Image(systemName: "trash"),
-          message: "Message deleted",
-          button: ToastButton(title: "Undo", color: .red) {},
+          message: String(localized: "Message deleted"),
+          button: ToastButton(title: String(localized: "Undo"), color: .red) {},
           duration: 10
         ))
       try? await presentToast(
-        message: "Uploading…",
+        message: String(localized: "Uploading…"),
         task: { try await simulateWork(seconds: 2, returning: ()) },
         onSuccess: {
           ToastValue(
             icon: Image(systemName: "checkmark.circle"),
-            message: "Uploaded",
+            message: String(localized: "Uploaded"),
             kind: .success,
-            button: ToastButton(title: "View", color: .blue) {},
+            button: ToastButton(title: String(localized: "View"), color: .blue) {},
             duration: 10
           )
         },

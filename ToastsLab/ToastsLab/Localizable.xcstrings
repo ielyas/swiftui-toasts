@@ -1,0 +1,2084 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@ s" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ ث"
+          }
+        }
+      }
+    },
+    "%lld seconds" : {
+      "localizations" : {
+        "ar" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ثوانٍ"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ثانية"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "ثانية واحدة"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ثانية"
+                }
+              },
+              "two" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "ثانيتان"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld ثانية"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld second"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld seconds"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "1 s, 3 s and 6 s" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 ث و3 ث و6 ث"
+          }
+        }
+      }
+    },
+    "1.5 s, then failure toast" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1.5 ث، ثم إشعار فشل"
+          }
+        }
+      }
+    },
+    "1.5 s, then success toast" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1.5 ث، ثم إشعار نجاح"
+          }
+        }
+      }
+    },
+    "A new version is available." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يتوفر إصدار جديد."
+          }
+        }
+      }
+    },
+    "A second, independent toast host at the top" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مضيف إشعارات ثانٍ مستقل في الأعلى"
+          }
+        }
+      }
+    },
+    "Added to favorites" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أُضيف إلى المفضلة"
+          }
+        }
+      }
+    },
+    "Alongside a button" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مع زر إجراء"
+          }
+        }
+      }
+    },
+    "Animated custom icon" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أيقونة مخصصة متحركة"
+          }
+        }
+      }
+    },
+    "Any View works" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تعمل مع أي View"
+          }
+        }
+      }
+    },
+    "Appearance" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المظهر"
+          }
+        }
+      }
+    },
+    "Arabic message" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رسالة عربية"
+          }
+        }
+      }
+    },
+    "Back online" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عاد الاتصال"
+          }
+        }
+      }
+    },
+    "Bottom" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الأسفل"
+          }
+        }
+      }
+    },
+    "Builder" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المُنشئ"
+          }
+        }
+      }
+    },
+    "Burst of 3" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 إشعارات متتالية"
+          }
+        }
+      }
+    },
+    "Burst of 6 at once" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "6 إشعارات دفعة واحدة"
+          }
+        }
+      }
+    },
+    "Button" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الزر"
+          }
+        }
+      }
+    },
+    "Button never truncates; message does" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لا يُقتطع الزر، بل الرسالة"
+          }
+        }
+      }
+    },
+    "Button without icon" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "زر بلا أيقونة"
+          }
+        }
+      }
+    },
+    "Buttons" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الأزرار"
+          }
+        }
+      }
+    },
+    "Caller received: %lld" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "استلم المستدعي: %lld"
+          }
+        }
+      }
+    },
+    "Cancel the caller's Task after 1 s" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يُلغى Task المستدعي بعد 1 ث"
+          }
+        }
+      }
+    },
+    "Cancelled" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أُلغي"
+          }
+        }
+      }
+    },
+    "Catalog" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المعرض"
+          }
+        }
+      }
+    },
+    "Changing the position while toasts are visible moves them live." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إذا غيّرت الموضع والإشعارات ظاهرة، تنتقل إليه فورًا."
+          }
+        }
+      }
+    },
+    "Clamped to 0 s" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تُحتسب 0 ث"
+          }
+        }
+      }
+    },
+    "Clamped to 10 s" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تُحتسب 10 ث"
+          }
+        }
+      }
+    },
+    "Close button" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "زر الإغلاق"
+          }
+        }
+      }
+    },
+    "Close button with action" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "زر الإغلاق مع زر إجراء"
+          }
+        }
+      }
+    },
+    "Close button, long message" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "زر الإغلاق مع رسالة طويلة"
+          }
+        }
+      }
+    },
+    "Closed %@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أغلقت %@"
+          }
+        }
+      }
+    },
+    "Color" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اللون"
+          }
+        }
+      }
+    },
+    "Color defaults to .primary" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اللون الافتراضي .primary"
+          }
+        }
+      }
+    },
+    "Colored, triggers a follow-up toast" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ملوّن، ويُظهر إشعارًا لاحقًا"
+          }
+        }
+      }
+    },
+    "Confirm" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تأكيد"
+          }
+        }
+      }
+    },
+    "Content" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المحتوى"
+          }
+        }
+      }
+    },
+    "Contexts" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "السياقات"
+          }
+        }
+      }
+    },
+    "Couldn't send message" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تعذّر إرسال الرسالة"
+          }
+        }
+      }
+    },
+    "Counted %lld items" : {
+      "localizations" : {
+        "ar" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "عُدّت %lld عناصر"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "عُدّ %lld عنصرًا"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "عُدّ عنصر واحد"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "عُدّ %lld عنصر"
+                }
+              },
+              "two" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "عُدّ عنصران"
+                }
+              },
+              "zero" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "لم يُعدّ أي عنصر"
+                }
+              }
+            }
+          }
+        },
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Counted %lld item"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "Counted %lld items"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "Counting…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جارٍ العدّ…"
+          }
+        }
+      }
+    },
+    "Custom" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مخصصة"
+          }
+        }
+      }
+    },
+    "Dark" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "داكن"
+          }
+        }
+      }
+    },
+    "Decides the haptic played as the toast appears." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يحدد الاهتزاز الذي يصاحب ظهور الإشعار."
+          }
+        }
+      }
+    },
+    "Default button" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "زر افتراضي"
+          }
+        }
+      }
+    },
+    "Dismiss all" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إغلاق الكل"
+          }
+        }
+      }
+    },
+    "Dismiss from code" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إغلاق من الكود"
+          }
+        }
+      }
+    },
+    "Dismissing" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الإغلاق"
+          }
+        }
+      }
+    },
+    "Dismissing soon…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "سيُغلق قريبًا…"
+          }
+        }
+      }
+    },
+    "Done" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اكتمل"
+          }
+        }
+      }
+    },
+    "Downloading…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جارٍ التنزيل…"
+          }
+        }
+      }
+    },
+    "Duration" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المدة"
+          }
+        }
+      }
+    },
+    "Each kind plays its system haptic as the toast expands. Loading toasts play their result's." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لكل نوع اهتزاز من النظام يُصدره حين يتسع الإشعار، وإشعار التحميل يُصدر اهتزاز نتيجته."
+          }
+        }
+      }
+    },
+    "Effective" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الفعلية"
+          }
+        }
+      }
+    },
+    "Emoji" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إيموجي"
+          }
+        }
+      }
+    },
+    "Emoji icon" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أيقونة إيموجي"
+          }
+        }
+      }
+    },
+    "Error" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "خطأ"
+          }
+        }
+      }
+    },
+    "Error notification" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اهتزاز الخطأ"
+          }
+        }
+      }
+    },
+    "Every toast, loading ones included" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "كل الإشعارات، ومنها إشعارات التحميل"
+          }
+        }
+      }
+    },
+    "Expandable and dismissible" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يتوسع ويُغلق"
+          }
+        }
+      }
+    },
+    "Fails" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يفشل"
+          }
+        }
+      }
+    },
+    "From a full-screen cover" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "من شاشة كاملة"
+          }
+        }
+      }
+    },
+    "From a pushed screen" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "من شاشة فرعية"
+          }
+        }
+      }
+    },
+    "From a sheet" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "من ورقة منبثقة"
+          }
+        }
+      }
+    },
+    "Full-screen cover" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "شاشة كاملة"
+          }
+        }
+      }
+    },
+    "Glass backdrop" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "خلفية زجاجية"
+          }
+        }
+      }
+    },
+    "Glass over color" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "زجاج فوق الألوان"
+          }
+        }
+      }
+    },
+    "Gradient icon" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أيقونة متدرجة"
+          }
+        }
+      }
+    },
+    "Hello from %@" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مرحبًا من %@"
+          }
+        }
+      }
+    },
+    "Hello from a pushed screen" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مرحبًا من شاشة فرعية"
+          }
+        }
+      }
+    },
+    "Hello from the builder" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مرحبًا من المُنشئ"
+          }
+        }
+      }
+    },
+    "Icon" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الأيقونة"
+          }
+        }
+      }
+    },
+    "Icon keeps its own styling" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تحتفظ الأيقونة بتنسيقها"
+          }
+        }
+      }
+    },
+    "Info" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "معلومة"
+          }
+        }
+      }
+    },
+    "Inside the toast" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "داخل الإشعار"
+          }
+        }
+      }
+    },
+    "Keyboard" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لوحة المفاتيح"
+          }
+        }
+      }
+    },
+    "Kind" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "النوع"
+          }
+        }
+      }
+    },
+    "Kinds" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الأنواع"
+          }
+        }
+      }
+    },
+    "Light" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فاتح"
+          }
+        }
+      }
+    },
+    "Lives for %lld s" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يبقى %lld ث"
+          }
+        }
+      }
+    },
+    "Loading" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "التحميل"
+          }
+        }
+      }
+    },
+    "Loading (async)" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "التحميل (async)"
+          }
+        }
+      }
+    },
+    "Loading and regular together" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إشعار تحميل وإشعار عادي معًا"
+          }
+        }
+      }
+    },
+    "Loading in parallel…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جارٍ التحميل بالتوازي…"
+          }
+        }
+      }
+    },
+    "Loading toasts can't be swiped away" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لا يُغلق إشعار التحميل بالسحب"
+          }
+        }
+      }
+    },
+    "Loading, then dismiss" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تحميل ثم إغلاق"
+          }
+        }
+      }
+    },
+    "Long button title" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عنوان زر طويل"
+          }
+        }
+      }
+    },
+    "Long message" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رسالة طويلة"
+          }
+        }
+      }
+    },
+    "Message" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الرسالة"
+          }
+        }
+      }
+    },
+    "Message deleted" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حُذفت الرسالة"
+          }
+        }
+      }
+    },
+    "Message only" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رسالة فقط"
+          }
+        }
+      }
+    },
+    "Message only toast." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إشعار برسالة فقط."
+          }
+        }
+      }
+    },
+    "Mixed durations" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مدد مختلفة"
+          }
+        }
+      }
+    },
+    "Moving…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جارٍ النقل…"
+          }
+        }
+      }
+    },
+    "Multiple hosts" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عدة مضيفين"
+          }
+        }
+      }
+    },
+    "Nested host (top)" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مضيف متداخل (الأعلى)"
+          }
+        }
+      }
+    },
+    "Network connection lost" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "انقطع الاتصال بالشبكة"
+          }
+        }
+      }
+    },
+    "No icon, no button" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "بلا أيقونة ولا زر"
+          }
+        }
+      }
+    },
+    "No limit on stack size" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لا حد لعدد الإشعارات"
+          }
+        }
+      }
+    },
+    "None" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "بلا"
+          }
+        }
+      }
+    },
+    "OK" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حسنًا"
+          }
+        }
+      }
+    },
+    "Open" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فتح"
+          }
+        }
+      }
+    },
+    "Open in Files" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "فتح في الملفات"
+          }
+        }
+      }
+    },
+    "Parallel done" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اكتمل التحميل المتوازي"
+          }
+        }
+      }
+    },
+    "Payment sent" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أُرسلت الدفعة"
+          }
+        }
+      }
+    },
+    "Photo deleted" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حُذفت الصورة"
+          }
+        }
+      }
+    },
+    "Position" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الموضع"
+          }
+        }
+      }
+    },
+    "Position: bottom" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الموضع: الأسفل"
+          }
+        }
+      }
+    },
+    "Position: top" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الموضع: الأعلى"
+          }
+        }
+      }
+    },
+    "Present" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عرض"
+          }
+        }
+      }
+    },
+    "Present 3 times" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عرض 3 مرات"
+          }
+        }
+      }
+    },
+    "Present toast" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عرض إشعار"
+          }
+        }
+      }
+    },
+    "Present, then dismiss" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عرض ثم إغلاق"
+          }
+        }
+      }
+    },
+    "Presentation" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "العرض"
+          }
+        }
+      }
+    },
+    "Pushed" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "شاشة فرعية"
+          }
+        }
+      }
+    },
+    "Recording…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جارٍ التسجيل…"
+          }
+        }
+      }
+    },
+    "Regular toast" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إشعار عادي"
+          }
+        }
+      }
+    },
+    "Removed almost immediately" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يختفي فورًا تقريبًا"
+          }
+        }
+      }
+    },
+    "Requested" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المطلوبة"
+          }
+        }
+      }
+    },
+    "Restored" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "استُعيدت الرسالة"
+          }
+        }
+      }
+    },
+    "Result toast can carry an action" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يمكن أن يحمل إشعار النتيجة زرًا"
+          }
+        }
+      }
+    },
+    "Retry" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إعادة المحاولة"
+          }
+        }
+      }
+    },
+    "Right-to-left layout" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "التخطيط من اليمين لليسار"
+          }
+        }
+      }
+    },
+    "Right-to-left text" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نص من اليمين لليسار"
+          }
+        }
+      }
+    },
+    "SF Symbol icon" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أيقونة SF Symbol"
+          }
+        }
+      }
+    },
+    "Safe area" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "المنطقة الآمنة"
+          }
+        }
+      }
+    },
+    "Saved" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حُفظ"
+          }
+        }
+      }
+    },
+    "Saving…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جارٍ الحفظ…"
+          }
+        }
+      }
+    },
+    "Settings" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الإعدادات"
+          }
+        }
+      }
+    },
+    "Sheet" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ورقة منبثقة"
+          }
+        }
+      }
+    },
+    "Sheet with its own installToast" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ورقة منبثقة بـ installToast مستقل"
+          }
+        }
+      }
+    },
+    "Show button" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إظهار الزر"
+          }
+        }
+      }
+    },
+    "Show tab bar" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إظهار شريط التبويبات"
+          }
+        }
+      }
+    },
+    "Shows for 10 s, dismissed after 1.5 s" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يظهر 10 ث، ويُغلق بعد 1.5 ث"
+          }
+        }
+      }
+    },
+    "Single line, tail truncation" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "سطر واحد، يُقتطع آخره"
+          }
+        }
+      }
+    },
+    "Slow (6 s)" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "بطيء (6 ث)"
+          }
+        }
+      }
+    },
+    "Soft impact" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نقرة خفيفة"
+          }
+        }
+      }
+    },
+    "Stacking" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "التكديس"
+          }
+        }
+      }
+    },
+    "Staggered by 0.2 s" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "بفاصل 0.2 ث"
+          }
+        }
+      }
+    },
+    "Storage almost full" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "التخزين ممتلئ تقريبًا"
+          }
+        }
+      }
+    },
+    "Succeeds" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ينجح"
+          }
+        }
+      }
+    },
+    "Success" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نجاح"
+          }
+        }
+      }
+    },
+    "Success notification" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اهتزاز النجاح"
+          }
+        }
+      }
+    },
+    "Success with button" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نجاح مع زر"
+          }
+        }
+      }
+    },
+    "Swipe a toast toward the edge to dismiss it early. Dragging pauses the timer." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اسحب الإشعار نحو الحافة لإغلاقه مبكرًا. يتوقف المؤقت أثناء السحب."
+          }
+        }
+      }
+    },
+    "Symbol" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رمز"
+          }
+        }
+      }
+    },
+    "Synced" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اكتملت المزامنة"
+          }
+        }
+      }
+    },
+    "Syncing…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جارٍ المزامنة…"
+          }
+        }
+      }
+    },
+    "System" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "النظام"
+          }
+        }
+      }
+    },
+    "Tap ✕ to dismiss." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اضغط ✕ للإغلاق."
+          }
+        }
+      }
+    },
+    "Tapped \"%@\"" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ضغطت «%@»"
+          }
+        }
+      }
+    },
+    "Tapping a button runs its action but does not dismiss the toast." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يُنفّذ الزر إجراءه دون أن يُغلق الإشعار."
+          }
+        }
+      }
+    },
+    "Task keeps running after the modal closes" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تستمر المهمة بعد إغلاق النافذة"
+          }
+        }
+      }
+    },
+    "Task takes %@ s" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تستغرق المهمة %@ ث"
+          }
+        }
+      }
+    },
+    "Task throws" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تفشل المهمة"
+          }
+        }
+      }
+    },
+    "Test toast" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إشعار تجريبي"
+          }
+        }
+      }
+    },
+    "Text as the icon view" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نص بدل الأيقونة"
+          }
+        }
+      }
+    },
+    "Text size" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "حجم النص"
+          }
+        }
+      }
+    },
+    "The call returns the task's result" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يُرجع الاستدعاء نتيجة المهمة"
+          }
+        }
+      }
+    },
+    "The close button is opt-in with showsDismissButton. dismissToast takes the ID presentToast returns, or no ID to dismiss everything." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يظهر زر الإغلاق بتفعيل showsDismissButton. تأخذ dismissToast المعرّف الذي تُرجعه presentToast، أو تُستدعى بلا معرّف لإغلاق كل الإشعارات."
+          }
+        }
+      }
+    },
+    "The default" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الافتراضية"
+          }
+        }
+      }
+    },
+    "The maximum" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الحد الأقصى"
+          }
+        }
+      }
+    },
+    "The observer on each tab reports the tab bar and navigation bar insets, so toasts avoid them. Turn it off to compare." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يرصد المراقب في كل تبويب حدود شريط التبويبات وشريط التنقل، فتتجنبها الإشعارات. أوقفه للمقارنة."
+          }
+        }
+      }
+    },
+    "The toast window sits above sheets" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "نافذة الإشعارات فوق الأوراق المنبثقة"
+          }
+        }
+      }
+    },
+    "Theme" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "السمة"
+          }
+        }
+      }
+    },
+    "This is a very long toast message that will certainly not fit on a single line of the screen." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "هذه رسالة إشعار طويلة جدًا، ولن تتسع لها الشاشة في سطر واحد مهما حاولنا."
+          }
+        }
+      }
+    },
+    "Tint" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "التلوين"
+          }
+        }
+      }
+    },
+    "Tinted icon" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أيقونة ملونة"
+          }
+        }
+      }
+    },
+    "Title" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "العنوان"
+          }
+        }
+      }
+    },
+    "Toast" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إشعار"
+          }
+        }
+      }
+    },
+    "Toast number %lld" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الإشعار رقم %lld"
+          }
+        }
+      }
+    },
+    "Toast outlives the modal" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يبقى الإشعار بعد إغلاق النافذة"
+          }
+        }
+      }
+    },
+    "Toast with action required." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إشعار يتطلب إجراءً."
+          }
+        }
+      }
+    },
+    "Toast, then flip position" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إشعار ثم قلب الموضع"
+          }
+        }
+      }
+    },
+    "Top" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "الأعلى"
+          }
+        }
+      }
+    },
+    "Type, then press return" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اكتب ثم اضغط إدخال"
+          }
+        }
+      }
+    },
+    "Undo" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تراجع"
+          }
+        }
+      }
+    },
+    "Undo button" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "زر التراجع"
+          }
+        }
+      }
+    },
+    "Upload finished" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اكتمل الرفع"
+          }
+        }
+      }
+    },
+    "Uploaded" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "رُفع الملف"
+          }
+        }
+      }
+    },
+    "Uploading large file…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جارٍ رفع ملف كبير…"
+          }
+        }
+      }
+    },
+    "Uploading…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جارٍ الرفع…"
+          }
+        }
+      }
+    },
+    "Use returned value" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "استخدام القيمة المُرجعة"
+          }
+        }
+      }
+    },
+    "Values above 10 s are clamped by the library." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تحتسب المكتبة أي قيمة فوق 10 ث على أنها 10 ث."
+          }
+        }
+      }
+    },
+    "View" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "عرض"
+          }
+        }
+      }
+    },
+    "Warning" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تحذير"
+          }
+        }
+      }
+    },
+    "Warning notification" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "اهتزاز التحذير"
+          }
+        }
+      }
+    },
+    "Watch the stack move" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "راقب انتقال الإشعارات"
+          }
+        }
+      }
+    },
+    "When enabled, the message shows with a spinner, then the composed toast replaces it." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إذا فعّلته، تظهر الرسالة مع مؤشر تحميل، ثم يحل محلها الإشعار الذي أنشأته."
+          }
+        }
+      }
+    },
+    "With button" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مع زر"
+          }
+        }
+      }
+    },
+    "With the safe-area observer on, bottom toasts should rise above the keyboard." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إذا كان مراقب المنطقة الآمنة مفعّلًا، ترتفع الإشعارات السفلية فوق لوحة المفاتيح."
+          }
+        }
+      }
+    },
+    "Working…" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "جارٍ العمل…"
+          }
+        }
+      }
+    },
+    "Wrap in loading task" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "تغليف بمهمة تحميل"
+          }
+        }
+      }
+    },
+    "You have a new notification." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "لديك إشعار جديد."
+          }
+        }
+      }
+    },
+    "You reached 1,000 steps!" : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "مشيت 1,000 خطوة!"
+          }
+        }
+      }
+    },
+    "You're offline." : {
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "أنت غير متصل بالإنترنت."
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

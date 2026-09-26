@@ -28,13 +28,13 @@ struct CatalogView: View {
     Section {
       DemoRow(title: "Info", detail: "Soft impact", systemImage: "info.circle") {
         presentToast(
-          ToastValue(icon: Image(systemName: "info.circle"), message: "A new version is available.", kind: .info))
+          ToastValue(icon: Image(systemName: "info.circle"), message: String(localized: "A new version is available."), kind: .info))
       }
       DemoRow(title: "Success", detail: "Success notification", systemImage: "checkmark.circle") {
         presentToast(
           ToastValue(
             icon: Image(systemName: "checkmark.circle.fill").foregroundStyle(.green),
-            message: "Payment sent",
+            message: String(localized: "Payment sent"),
             kind: .success
           ))
       }
@@ -42,7 +42,7 @@ struct CatalogView: View {
         presentToast(
           ToastValue(
             icon: Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.orange),
-            message: "Storage almost full",
+            message: String(localized: "Storage almost full"),
             kind: .warning
           ))
       }
@@ -50,9 +50,9 @@ struct CatalogView: View {
         presentToast(
           ToastValue(
             icon: Image(systemName: "xmark.octagon.fill").foregroundStyle(.red),
-            message: "Couldn't send message",
+            message: String(localized: "Couldn't send message"),
             kind: .error,
-            button: ToastButton(title: "Retry", color: .red) {}
+            button: ToastButton(title: String(localized: "Retry"), color: .red) {}
           ))
       }
     } header: {
@@ -67,42 +67,42 @@ struct CatalogView: View {
   private var contentSection: some View {
     Section {
       DemoRow(title: "Message only", detail: "No icon, no button", systemImage: "text.alignleft") {
-        presentToast(ToastValue(message: "Message only toast."))
+        presentToast(ToastValue(message: String(localized: "Message only toast.")))
       }
       DemoRow(title: "SF Symbol icon", systemImage: "bell") {
         presentToast(
-          ToastValue(icon: Image(systemName: "bell"), message: "You have a new notification."))
+          ToastValue(icon: Image(systemName: "bell"), message: String(localized: "You have a new notification.")))
       }
       DemoRow(title: "Tinted icon", detail: "Icon keeps its own styling", systemImage: "paintpalette") {
         presentToast(
           ToastValue(
             icon: Image(systemName: "checkmark.circle.fill").foregroundStyle(.green),
-            message: "Saved",
+            message: String(localized: "Saved"),
             kind: .success
           ))
       }
       DemoRow(title: "Emoji icon", detail: "Text as the icon view", systemImage: "face.smiling") {
-        presentToast(ToastValue(icon: Text("🎉"), message: "You reached 1,000 steps!"))
+        presentToast(ToastValue(icon: Text(verbatim: "🎉"), message: String(localized: "You reached 1,000 steps!")))
       }
       DemoRow(title: "Animated custom icon", detail: "Any View works", systemImage: "circle.dotted") {
-        presentToast(ToastValue(icon: PulsingDot(), message: "Recording…"))
+        presentToast(ToastValue(icon: PulsingDot(), message: String(localized: "Recording…")))
       }
       DemoRow(title: "Gradient icon", systemImage: "star.circle") {
-        presentToast(ToastValue(icon: GradientBadge(), message: "Added to favorites"))
+        presentToast(ToastValue(icon: GradientBadge(), message: String(localized: "Added to favorites")))
       }
       DemoRow(title: "Long message", detail: "Single line, tail truncation", systemImage: "text.word.spacing") {
         presentToast(
           ToastValue(
             icon: Image(systemName: "doc.text"),
             message:
-              "This is a very long toast message that will certainly not fit on a single line of the screen."
+              String(localized: "This is a very long toast message that will certainly not fit on a single line of the screen.")
           ))
       }
       DemoRow(title: "Arabic message", detail: "Right-to-left text", systemImage: "character.bubble") {
         presentToast(
           ToastValue(
             icon: Image(systemName: "checkmark.circle"),
-            message: "تم حفظ التغييرات بنجاح",
+            message: "حُفظت التغييرات",
             kind: .success
           ))
       }
@@ -119,10 +119,10 @@ struct CatalogView: View {
         presentToast(
           ToastValue(
             icon: Image(systemName: "wifi.exclamationmark"),
-            message: "You're offline.",
+            message: String(localized: "You're offline."),
             kind: .warning,
-            button: ToastButton(title: "Retry") {
-              presentToast(ToastValue(icon: Image(systemName: "wifi"), message: "Back online", kind: .success))
+            button: ToastButton(title: String(localized: "Retry")) {
+              presentToast(ToastValue(icon: Image(systemName: "wifi"), message: String(localized: "Back online"), kind: .success))
             }
           ))
       }
@@ -130,26 +130,26 @@ struct CatalogView: View {
         presentToast(
           ToastValue(
             icon: Image(systemName: "trash"),
-            message: "Message deleted",
-            button: ToastButton(title: "Undo", color: .red) {
+            message: String(localized: "Message deleted"),
+            button: ToastButton(title: String(localized: "Undo"), color: .red) {
               presentToast(
-                ToastValue(icon: Image(systemName: "arrow.uturn.backward"), message: "Restored", kind: .success))
+                ToastValue(icon: Image(systemName: "arrow.uturn.backward"), message: String(localized: "Restored"), kind: .success))
             }
           ))
       }
       DemoRow(title: "Button without icon", systemImage: "rectangle.dashed") {
         presentToast(
           ToastValue(
-            message: "Toast with action required.",
-            button: ToastButton(title: "Confirm", color: .green) {}
+            message: String(localized: "Toast with action required."),
+            button: ToastButton(title: String(localized: "Confirm"), color: .green) {}
           ))
       }
       DemoRow(title: "Long button title", detail: "Button never truncates; message does", systemImage: "arrow.left.and.right") {
         presentToast(
           ToastValue(
             icon: Image(systemName: "icloud.and.arrow.up"),
-            message: "Upload finished",
-            button: ToastButton(title: "Open in Files", color: .blue) {}
+            message: String(localized: "Upload finished"),
+            button: ToastButton(title: String(localized: "Open in Files"), color: .blue) {}
           ))
       }
     } header: {
@@ -167,7 +167,7 @@ struct CatalogView: View {
         presentToast(
           ToastValue(
             icon: Image(systemName: "bell"),
-            message: "Tap ✕ to dismiss.",
+            message: String(localized: "Tap ✕ to dismiss."),
             showsDismissButton: true,
             duration: 10
           ))
@@ -176,8 +176,8 @@ struct CatalogView: View {
         presentToast(
           ToastValue(
             icon: Image(systemName: "trash"),
-            message: "Message deleted",
-            button: ToastButton(title: "Undo", color: .red) {},
+            message: String(localized: "Message deleted"),
+            button: ToastButton(title: String(localized: "Undo"), color: .red) {},
             showsDismissButton: true,
             duration: 10
           ))
@@ -187,13 +187,13 @@ struct CatalogView: View {
           ToastValue(
             icon: Image(systemName: "doc.text"),
             message:
-              "This is a very long toast message that will certainly not fit on a single line of the screen.",
+              String(localized: "This is a very long toast message that will certainly not fit on a single line of the screen."),
             showsDismissButton: true,
             duration: 10
           ))
       }
       DemoRow(title: "Dismiss from code", detail: "Shows for 10 s, dismissed after 1.5 s", systemImage: "timer") {
-        let id = presentToast(ToastValue(icon: Image(systemName: "timer"), message: "Dismissing soon…", duration: 10))
+        let id = presentToast(ToastValue(icon: Image(systemName: "timer"), message: String(localized: "Dismissing soon…"), duration: 10))
         Task {
           try? await Task.sleep(for: .seconds(1.5))
           dismissToast(id)
@@ -226,11 +226,12 @@ struct CatalogView: View {
     }
   }
 
-  private func durationRow(_ seconds: TimeInterval, detail: String? = nil) -> some View {
+  private func durationRow(_ seconds: TimeInterval, detail: LocalizedStringKey? = nil) -> some View {
     DemoRow(title: "\(Int(seconds)) seconds", detail: detail, systemImage: "timer") {
       presentToast(
         ToastValue(
           icon: Image(systemName: "timer"),
+          // An API parameter, so it stays in English.
           message: "duration: \(Int(seconds))",
           duration: seconds
         ))
@@ -244,8 +245,8 @@ struct CatalogView: View {
       DemoRow(title: "Succeeds", detail: "1.5 s, then success toast", systemImage: "checkmark.circle") {
         Task {
           try? await presentToast(
-            message: "Saving…",
-            task: { try await simulateWork(seconds: 1.5, returning: "Saved") },
+            message: String(localized: "Saving…"),
+            task: { try await simulateWork(seconds: 1.5, returning: String(localized: "Saved")) },
             onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: $0, kind: .success) },
             onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
           )
@@ -254,8 +255,8 @@ struct CatalogView: View {
       DemoRow(title: "Fails", detail: "1.5 s, then failure toast", systemImage: "xmark.circle") {
         Task {
           try? await presentToast(
-            message: "Syncing…",
-            task: { try await simulateWork(seconds: 1.5, returning: "Synced", fails: true) },
+            message: String(localized: "Syncing…"),
+            task: { try await simulateWork(seconds: 1.5, returning: String(localized: "Synced"), fails: true) },
             onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: $0, kind: .success) },
             onFailure: {
               ToastValue(
@@ -270,9 +271,9 @@ struct CatalogView: View {
       DemoRow(title: "Slow (6 s)", detail: "Loading toasts can't be swiped away", systemImage: "tortoise") {
         Task {
           try? await presentToast(
-            message: "Uploading large file…",
+            message: String(localized: "Uploading large file…"),
             task: { try await simulateWork(seconds: 6, returning: ()) },
-            onSuccess: { ToastValue(icon: Image(systemName: "icloud.and.arrow.up"), message: "Uploaded", kind: .success) },
+            onSuccess: { ToastValue(icon: Image(systemName: "icloud.and.arrow.up"), message: String(localized: "Uploaded"), kind: .success) },
             onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
           )
         }
@@ -280,13 +281,13 @@ struct CatalogView: View {
       DemoRow(title: "Success with button", detail: "Result toast can carry an action", systemImage: "square.and.arrow.down") {
         Task {
           try? await presentToast(
-            message: "Downloading…",
+            message: String(localized: "Downloading…"),
             task: { try await simulateWork(seconds: 1.5, returning: "report.pdf") },
             onSuccess: { name in
               ToastValue(
                 icon: Image(systemName: "doc.fill"),
                 message: name,
-                button: ToastButton(title: "Open", color: .blue) {}
+                button: ToastButton(title: String(localized: "Open"), color: .blue) {}
               )
             },
             onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
@@ -297,12 +298,12 @@ struct CatalogView: View {
         Task {
           do {
             let count = try await presentToast(
-              message: "Counting…",
+              message: String(localized: "Counting…"),
               task: { try await simulateWork(seconds: 1, returning: 42) },
-              onSuccess: { ToastValue(icon: Image(systemName: "number"), message: "Counted \($0) items") },
+              onSuccess: { ToastValue(icon: Image(systemName: "number"), message: String(localized: "Counted \($0) items")) },
               onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
             )
-            presentToast(ToastValue(message: "Caller received: \(count)"))
+            presentToast(ToastValue(message: String(localized: "Caller received: \(count)")))
           } catch {
             // The failure toast already reports the error.
           }
@@ -311,9 +312,9 @@ struct CatalogView: View {
       DemoRow(title: "Cancelled", detail: "Cancel the caller's Task after 1 s", systemImage: "stop.circle") {
         let task = Task {
           try? await presentToast(
-            message: "Working…",
+            message: String(localized: "Working…"),
             task: { try await simulateWork(seconds: 5, returning: ()) },
-            onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: "Done", kind: .success) },
+            onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: String(localized: "Done"), kind: .success) },
             onFailure: { error in
               ToastValue(
                 icon: Image(systemName: "stop.circle"),
@@ -340,7 +341,7 @@ struct CatalogView: View {
         Task {
           for index in 1...3 {
             presentToast(
-              ToastValue(icon: Image(systemName: "\(index).circle"), message: "Toast number \(index)"))
+              ToastValue(icon: Image(systemName: "\(index).circle"), message: String(localized: "Toast number \(index)")))
             try? await Task.sleep(for: .seconds(0.2))
           }
         }
@@ -348,7 +349,7 @@ struct CatalogView: View {
       DemoRow(title: "Burst of 6 at once", detail: "No limit on stack size", systemImage: "square.stack") {
         for index in 1...6 {
           presentToast(
-            ToastValue(icon: Image(systemName: "\(index).square"), message: "Toast number \(index)"))
+            ToastValue(icon: Image(systemName: "\(index).square"), message: String(localized: "Toast number \(index)")))
         }
       }
       DemoRow(title: "Mixed durations", detail: "1 s, 3 s and 6 s", systemImage: "hourglass") {
@@ -356,18 +357,18 @@ struct CatalogView: View {
           presentToast(
             ToastValue(
               icon: Image(systemName: "hourglass"),
-              message: "Lives for \(Int(seconds)) s",
+              message: String(localized: "Lives for \(Int(seconds)) s"),
               duration: seconds
             ))
         }
       }
       DemoRow(title: "Loading and regular together", systemImage: "square.2.layers.3d") {
-        presentToast(ToastValue(icon: Image(systemName: "bell"), message: "Regular toast"))
+        presentToast(ToastValue(icon: Image(systemName: "bell"), message: String(localized: "Regular toast")))
         Task {
           try? await presentToast(
-            message: "Loading in parallel…",
+            message: String(localized: "Loading in parallel…"),
             task: { try await simulateWork(seconds: 2, returning: ()) },
-            onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: "Parallel done", kind: .success) },
+            onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: String(localized: "Parallel done"), kind: .success) },
             onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
           )
         }

@@ -8,11 +8,11 @@ struct BuilderView: View {
   @State private var iconKind: IconKind = .symbol
   @State private var symbolName = "bell"
   @State private var iconTint: Color = .primary
-  @State private var message = "Hello from the builder"
+  @State private var message = String(localized: "Hello from the builder")
   @State private var kind: ToastKind = .info
   @State private var hasButton = false
   @State private var showsDismissButton = false
-  @State private var buttonTitle = "Undo"
+  @State private var buttonTitle = String(localized: "Undo")
   @State private var buttonColor: Color = .red
   @State private var duration: Double = 3
   @State private var isLoading = false
@@ -33,7 +33,7 @@ struct BuilderView: View {
         }
         Section {
           Picker("Kind", selection: $kind) {
-            ForEach(ToastKind.allCases, id: \.self) { Text(String(describing: $0).capitalized).tag($0) }
+            ForEach(ToastKind.allCases, id: \.self) { Text($0.title).tag($0) }
           }
           .pickerStyle(.segmented)
         } header: {
@@ -63,13 +63,13 @@ struct BuilderView: View {
   private var iconSection: some View {
     Section("Icon") {
       Picker("Kind", selection: $iconKind) {
-        ForEach(IconKind.allCases) { Text($0.rawValue).tag($0) }
+        ForEach(IconKind.allCases) { Text($0.title).tag($0) }
       }
       .pickerStyle(.segmented)
       if iconKind == .symbol {
         Picker("Symbol", selection: $symbolName) {
           ForEach(symbols, id: \.self) { name in
-            Label(name, systemImage: name).tag(name)
+            Label { Text(verbatim: name) } icon: { Image(systemName: name) }.tag(name)
           }
         }
         ColorPicker("Tint", selection: $iconTint)
@@ -98,12 +98,12 @@ struct BuilderView: View {
       Slider(value: $duration, in: 0...15, step: 0.5) {
         Text("Duration")
       } minimumValueLabel: {
-        Text("0")
+        Text(verbatim: "0")
       } maximumValueLabel: {
-        Text("15")
+        Text(verbatim: "15")
       }
-      LabeledContent("Requested", value: "\(duration.formatted()) s")
-      LabeledContent("Effective", value: "\(min(duration, 10).formatted()) s")
+      LabeledContent("Requested", value: String(localized: "\(duration.formatted()) s"))
+      LabeledContent("Effective", value: String(localized: "\(min(duration, 10).formatted()) s"))
     } header: {
       Text("Duration")
     } footer: {
@@ -130,7 +130,7 @@ struct BuilderView: View {
     switch iconKind {
     case .none: nil
     case .symbol: Image(systemName: symbolName).foregroundStyle(iconTint)
-    case .emoji: Text("🔥")
+    case .emoji: Text(verbatim: "🔥")
     case .custom: PulsingDot(color: iconTint == .primary ? .red : iconTint)
     }
   }
@@ -138,7 +138,7 @@ struct BuilderView: View {
   private var button: ToastButton? {
     guard hasButton else { return nil }
     return ToastButton(title: buttonTitle, color: buttonColor) {
-      presentToast(ToastValue(message: "Tapped \"\(buttonTitle)\""))
+      presentToast(ToastValue(message: String(localized: "Tapped \"\(buttonTitle)\"")))
     }
   }
 
@@ -161,11 +161,28 @@ struct BuilderView: View {
   }
 }
 
-private enum IconKind: String, CaseIterable, Identifiable {
-  case none = "None"
-  case symbol = "Symbol"
-  case emoji = "Emoji"
-  case custom = "Custom"
+private enum IconKind: CaseIterable, Identifiable {
+  case none, symbol, emoji, custom
 
   var id: Self { self }
+
+  var title: LocalizedStringKey {
+    switch self {
+    case .none: "None"
+    case .symbol: "Symbol"
+    case .emoji: "Emoji"
+    case .custom: "Custom"
+    }
+  }
+}
+
+extension ToastKind {
+  fileprivate var title: LocalizedStringKey {
+    switch self {
+    case .info: "Info"
+    case .success: "Success"
+    case .warning: "Warning"
+    case .error: "Error"
+    }
+  }
 }

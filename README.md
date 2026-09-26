@@ -225,6 +225,10 @@ and a bundle ID you can sign; it's gitignored.
 Launch with the `-autoplay` argument to present a sample of every toast shape without tapping. `-showcase` does the same over a blank screen, and `-light` or `-dark` forces the appearance; the README media
 is recorded that way.
 
+The lab is translated into Arabic, so you can check the toasts in a right-to-left app. Set the app's language to Arabic
+in Settings, or launch it with `-AppleLanguages "(ar)"`; the layout follows the language, and the RTL toggle still
+overrides it.
+
 ## License
 
 MIT. See [LICENSE.md](LICENSE.md).
