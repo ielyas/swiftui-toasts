@@ -5,11 +5,22 @@ A toast notification library for SwiftUI, built entirely on **Liquid Glass**.
 > This is a fork of [sunghyun-k/swiftui-toasts](https://github.com/sunghyun-k/swiftui-toasts) that drops the custom
 > background and legacy OS support in favor of the system Liquid Glass material. It requires iOS 26 or later.
 
-![Simulator Screen Recording - iPhone 15 Pro - 2024-09-16 at 11 53 37](https://github.com/user-attachments/assets/7b11b2f1-ed6e-4955-a674-c3bfd49ab8ad)
+<p>
+  <img src="docs/demo.gif" width="300" alt="Toasts entering as glass circles, expanding into capsules, then collapsing and leaving">
+  <img src="docs/toasts.png" width="300" alt="Several Liquid Glass toasts, including a long message with a close button and toasts with action buttons">
+</p>
 
-![Simulator Screen Recording - iPhone 16 Pro - 2024-09-18 at 10 53 57](https://github.com/user-attachments/assets/6c5f4906-aab6-4ef6-b9bb-844d7110586b)
+## Installation
 
-<img width="341" alt="SCR-20240916-kqog" src="https://github.com/user-attachments/assets/c072c767-8e26-471b-b156-80b204ca433b">
+Add the package in Xcode (**File → Add Package Dependencies…**) or in `Package.swift`:
+
+```swift
+dependencies: [
+  .package(url: "https://github.com/ielyas/swiftui-toasts.git", branch: "main")
+]
+```
+
+Then add the `Toasts` product to your target.
 
 ## Features
 
@@ -141,8 +152,6 @@ Toasts follow Apple's [Liquid Glass guidance](https://developer.apple.com/docume
 
 ## Customization
 
-<img width="356" alt="image" src="https://github.com/user-attachments/assets/937ef007-cbe7-4462-963c-2fb92a6cd844">
-
 - **Remove icon**
 
 ```swift
@@ -203,5 +212,8 @@ Dynamic Type. Generate the project with [XcodeGen](https://github.com/yonaskolb/
 ```sh
 cd ToastsLab && xcodegen generate && open ToastsLab.xcodeproj
 ```
+
+To run it on a device, copy `ToastsLab/Local.xcconfig.example` to `ToastsLab/Local.xcconfig` and fill in your team
+and a bundle ID you can sign; it's gitignored.
 
 Launch with the `-autoplay` argument to present a sample of every toast shape without tapping.

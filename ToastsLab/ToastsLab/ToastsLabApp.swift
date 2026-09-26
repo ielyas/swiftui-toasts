@@ -40,7 +40,7 @@ struct RootView: View {
 }
 
 /// Launch with `-autoplay` to present a sample of every toast shape without tapping,
-/// e.g. `xcrun simctl launch <device> sa.elyas.ToastsLab -autoplay`.
+/// e.g. `xcrun simctl launch <device> <bundle-id> -autoplay`.
 private struct AutoplayModifier: ViewModifier {
   @Environment(\.presentToast) private var presentToast
 

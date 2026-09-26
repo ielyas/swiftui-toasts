@@ -1,0 +1,6 @@
+// Signing for running Toasts Lab on a device. Override these in Local.xcconfig (gitignored),
+// e.g. copy Local.xcconfig.example, rather than editing this file.
+DEVELOPMENT_TEAM =
+PRODUCT_BUNDLE_IDENTIFIER = com.example.ToastsLab
+
+#include? "Local.xcconfig"

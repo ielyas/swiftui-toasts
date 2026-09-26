@@ -10,3 +10,4 @@ DerivedData/
 buildServer.json
 /ToastsExampleApp.swiftpm/.build
 /ToastsLab/*.xcodeproj
+/ToastsLab/Local.xcconfig

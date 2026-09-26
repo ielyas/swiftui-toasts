@@ -1,6 +1,6 @@
 name: ToastsLab
 options:
-  bundleIdPrefix: sa.elyas
+  bundleIdPrefix: com.example
   deploymentTarget:
     iOS: "26.0"
 packages:
@@ -11,6 +11,9 @@ targets:
     type: application
     platform: iOS
     sources: [ToastsLab]
+    configFiles:
+      Debug: Signing.xcconfig
+      Release: Signing.xcconfig
     dependencies:
       - package: Toasts
         product: Toasts
@@ -19,7 +22,6 @@ targets:
         SWIFT_VERSION: "6.0"
         CODE_SIGN_STYLE: Automatic
         GENERATE_INFOPLIST_FILE: YES
-        PRODUCT_BUNDLE_IDENTIFIER: sa.elyas.ToastsLab
         INFOPLIST_KEY_CFBundleDisplayName: Toasts Lab
         INFOPLIST_KEY_UILaunchScreen_Generation: YES
         INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight"
