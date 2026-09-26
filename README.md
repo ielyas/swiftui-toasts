@@ -22,6 +22,7 @@ A toast notification library for SwiftUI, built entirely on **Liquid Glass**.
 - Seamless integration with SwiftUI
 - Adapts automatically to light and dark mode, Reduce Transparency, and Increase Contrast
 - Dynamic Type and Reduce Motion support
+- Haptic feedback for info, success, warning, and error toasts, timed with the toast's appearance
 - Slide gesture to dismiss
 - Loading state interface with async/await
 - Full VoiceOver compatibility for inclusive user experience
@@ -69,13 +70,37 @@ presentToast(
     return "Success"
   },
   onSuccess: { result in
-    ToastValue(icon: Image(systemName: "checkmark.circle"), message: result)
+    ToastValue(icon: Image(systemName: "checkmark.circle"), message: result, kind: .success)
   },
   onFailure: { error in
-    ToastValue(icon: Image(systemName: "xmark.circle"), message: error.localizedDescription)
+    ToastValue(icon: Image(systemName: "xmark.circle"), message: error.localizedDescription, kind: .error)
   }
 )
 ```
+
+## Haptics
+
+Each toast has a `kind` that describes what it communicates. Following Apple's
+[haptics guidelines](https://developer.apple.com/design/human-interface-guidelines/playing-haptics), a toast plays the
+system haptic whose meaning matches its kind, as the glass circle expands into the toast:
+
+| Kind | Haptic |
+| --- | --- |
+| `.info` (default) | Soft impact |
+| `.success` | Success notification |
+| `.warning` | Warning notification |
+| `.error` | Error notification |
+
+```swift
+presentToast(ToastValue(icon: Image(systemName: "exclamationmark.triangle"), message: "Storage almost full", kind: .warning))
+```
+
+Faint taps also mark the motion itself: one as the circle starts sliding in and one as the toast settles, then one as
+it starts collapsing and one as it closes into the circle and leaves. Expanding or collapsing a long message taps the
+same way as it starts and settles. They're skipped with Reduce Motion on.
+
+A loading toast stays silent while its task runs and plays the haptic of the toast it resolves into, so the feedback
+reports the outcome. Haptics follow the System Haptics setting.
 
 ## Liquid Glass design
 

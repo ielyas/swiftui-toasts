@@ -89,7 +89,7 @@ private struct ModalDemo: View {
           presentToast(ToastValue(icon: Image(systemName: "bell"), message: "Hello from \(title)"))
         }
         DemoRow(title: "Present, then dismiss", detail: "Toast outlives the modal", systemImage: "xmark.square") {
-          presentToast(ToastValue(icon: Image(systemName: "checkmark.circle"), message: "Closed \(title)"))
+          presentToast(ToastValue(icon: Image(systemName: "checkmark.circle"), message: "Closed \(title)", kind: .success))
           dismiss()
         }
         DemoRow(title: "Loading, then dismiss", detail: "Task keeps running after the modal closes", systemImage: "arrow.triangle.2.circlepath") {
@@ -97,8 +97,8 @@ private struct ModalDemo: View {
             try? await presentToast(
               message: "Saving…",
               task: { try await simulateWork(seconds: 2, returning: ()) },
-              onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: "Saved") },
-              onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription) }
+              onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: "Saved", kind: .success) },
+              onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
             )
           }
           dismiss()

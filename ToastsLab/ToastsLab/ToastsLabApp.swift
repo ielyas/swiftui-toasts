@@ -70,6 +70,7 @@ private struct AutoplayModifier: ViewModifier {
           ToastValue(
             icon: Image(systemName: "checkmark.circle"),
             message: "Uploaded",
+            kind: .success,
             button: ToastButton(title: "View", color: .blue) {},
             duration: 10
           )

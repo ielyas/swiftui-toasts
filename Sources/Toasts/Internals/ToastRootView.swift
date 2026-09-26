@@ -8,6 +8,10 @@ internal struct ToastRootView: View {
   var body: some View {
     main
       .onAppear(perform: manager.onAppear)
+      // A toast that closed back into its circle taps once more as it leaves.
+      .sensoryFeedback(trigger: manager.models.count) { oldCount, newCount in
+        newCount < oldCount && !reduceMotion ? MotionHaptic.left : nil
+      }
   }
 
   @ViewBuilder

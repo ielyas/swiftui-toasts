@@ -55,10 +55,11 @@ struct GlassBackdropView: View {
                 ToastValue(
                   icon: Image(systemName: "checkmark.circle"),
                   message: "Uploaded",
+                  kind: .success,
                   button: ToastButton(title: "View", color: .blue) {}
                 )
               },
-              onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription) }
+              onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
             )
           }
         }

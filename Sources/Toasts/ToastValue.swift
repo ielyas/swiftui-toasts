@@ -6,6 +6,8 @@ public struct ToastValue {
   internal var icon: AnyView?
   internal var message: String
   internal var button: ToastButton?
+  /// The haptic played as the toast appears; `nil` for a loading toast, which plays its result's.
+  internal var kind: ToastKind?
   /// If nil, the toast will persist and not disappear. Used when displaying a loading toast.
   internal var duration: TimeInterval?
 
@@ -14,16 +16,19 @@ public struct ToastValue {
   /// - Parameters:
   ///   - icon: An optional view to display as an icon in the toast.
   ///   - message: The text content of the toast.
+  ///   - kind: What the toast communicates, which decides the haptic it plays as it appears. Default is `.info`.
   ///   - button: An optional action button to display in the toast.
   ///   - duration: How long the toast should be displayed before automatically dismissing, in seconds. Clamped between 0 and 10 seconds. Default is 3.0.
   public init(
     icon: (any View)? = nil,
     message: String,
+    kind: ToastKind = .info,
     button: ToastButton? = nil,
     duration: TimeInterval = 3.0
   ) {
     self.icon = icon.map { AnyView($0) }
     self.message = message
+    self.kind = kind
     self.button = button
     self.duration = min(max(0, duration), 10)
   }
@@ -31,11 +36,13 @@ public struct ToastValue {
   internal init(
     icon: (any View)? = nil,
     message: String,
+    kind: ToastKind? = nil,
     button: ToastButton? = nil,
     duration: TimeInterval? = nil
   ) {
     self.icon = icon.map { AnyView($0) }
     self.message = message
+    self.kind = kind
     self.button = button
     self.duration = duration
   }

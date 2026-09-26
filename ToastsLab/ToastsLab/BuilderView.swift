@@ -9,6 +9,7 @@ struct BuilderView: View {
   @State private var symbolName = "bell"
   @State private var iconTint: Color = .primary
   @State private var message = "Hello from the builder"
+  @State private var kind: ToastKind = .info
   @State private var hasButton = false
   @State private var buttonTitle = "Undo"
   @State private var buttonColor: Color = .red
@@ -28,6 +29,16 @@ struct BuilderView: View {
         iconSection
         Section("Message") {
           TextField("Message", text: $message)
+        }
+        Section {
+          Picker("Kind", selection: $kind) {
+            ForEach(ToastKind.allCases, id: \.self) { Text(String(describing: $0).capitalized).tag($0) }
+          }
+          .pickerStyle(.segmented)
+        } header: {
+          Text("Kind")
+        } footer: {
+          Text("Decides the haptic played as the toast appears.")
         }
         buttonSection
         durationSection
@@ -124,7 +135,7 @@ struct BuilderView: View {
   }
 
   private func present() {
-    let toast = ToastValue(icon: icon, message: message, button: button, duration: duration)
+    let toast = ToastValue(icon: icon, message: message, kind: kind, button: button, duration: duration)
     guard isLoading else {
       presentToast(toast)
       return
@@ -136,7 +147,7 @@ struct BuilderView: View {
         message: message,
         task: { try await simulateWork(seconds: seconds, returning: (), fails: fails) },
         onSuccess: { toast },
-        onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription) }
+        onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
       )
     }
   }

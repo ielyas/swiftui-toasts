@@ -6,6 +6,7 @@ internal struct ToastInteractingView: View {
   let manager: ToastManager
   @GestureState private var yOffset: CGFloat?
   @Environment(\.accessibilityReduceMotion) private var reduceMotion
+  @State private var motionHaptic: MotionHaptic?
 
   private var isDragging: Bool { yOffset != nil }
 
@@ -26,6 +27,24 @@ internal struct ToastInteractingView: View {
         await manager.startRemovalTask(for: model)
       }
       .task { await expand() }
+      // Plays as the circle morphs into the toast, and again when a loading toast resolves into
+      // its result, so the haptic lands with the animation it accompanies.
+      .sensoryFeedback(trigger: arrival) { _, arrival in
+        arrival.isExpanded ? arrival.kind?.sensoryFeedback : nil
+      }
+      .sensoryFeedback(trigger: motionHaptic) { _, haptic in
+        haptic?.sensoryFeedback
+      }
+      .onAppear {
+        if !reduceMotion { motionHaptic = .entering }
+      }
+      .onChange(of: model.isExpanded) { _, isExpanded in
+        if !isExpanded, model.isDismissing, !reduceMotion { motionHaptic = .leaving }
+      }
+  }
+
+  private var arrival: Arrival {
+    Arrival(isExpanded: model.isExpanded, kind: model.kind)
   }
 
   /// Lets the circle finish sliding in, then morphs it into the full toast.
@@ -44,6 +63,10 @@ internal struct ToastInteractingView: View {
     withAnimation(morphAnimation) {
       model.isExpanded = true
     }
+    guard (try? await Task.sleep(for: .seconds(morphAnimationDuration))) != nil,
+      !model.isDismissing
+    else { return }
+    motionHaptic = .settled
   }
 
   @MainActor
@@ -84,6 +107,11 @@ internal struct ToastInteractingView: View {
         }
       }
   }
+}
+
+private struct Arrival: Equatable {
+  var isExpanded: Bool
+  var kind: ToastKind?
 }
 
 private struct DismissTimer: Equatable {

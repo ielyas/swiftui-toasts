@@ -8,6 +8,7 @@ struct CatalogView: View {
   var body: some View {
     NavigationStack {
       List {
+        kindSection
         contentSection
         buttonSection
         durationSection
@@ -16,6 +17,46 @@ struct CatalogView: View {
       }
       .navigationTitle("Catalog")
       .labScreen()
+    }
+  }
+
+  // MARK: - Kinds
+
+  private var kindSection: some View {
+    Section {
+      DemoRow(title: "Info", detail: "Soft impact", systemImage: "info.circle") {
+        presentToast(
+          ToastValue(icon: Image(systemName: "info.circle"), message: "A new version is available.", kind: .info))
+      }
+      DemoRow(title: "Success", detail: "Success notification", systemImage: "checkmark.circle") {
+        presentToast(
+          ToastValue(
+            icon: Image(systemName: "checkmark.circle.fill").foregroundStyle(.green),
+            message: "Payment sent",
+            kind: .success
+          ))
+      }
+      DemoRow(title: "Warning", detail: "Warning notification", systemImage: "exclamationmark.triangle") {
+        presentToast(
+          ToastValue(
+            icon: Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.orange),
+            message: "Storage almost full",
+            kind: .warning
+          ))
+      }
+      DemoRow(title: "Error", detail: "Error notification", systemImage: "xmark.octagon") {
+        presentToast(
+          ToastValue(
+            icon: Image(systemName: "xmark.octagon.fill").foregroundStyle(.red),
+            message: "Couldn't send message",
+            kind: .error,
+            button: ToastButton(title: "Retry", color: .red) {}
+          ))
+      }
+    } header: {
+      Text("Kinds")
+    } footer: {
+      Text("Each kind plays its system haptic as the toast expands. Loading toasts play their result's.")
     }
   }
 
@@ -34,7 +75,8 @@ struct CatalogView: View {
         presentToast(
           ToastValue(
             icon: Image(systemName: "checkmark.circle.fill").foregroundStyle(.green),
-            message: "Saved"
+            message: "Saved",
+            kind: .success
           ))
       }
       DemoRow(title: "Emoji icon", detail: "Text as the icon view", systemImage: "face.smiling") {
@@ -58,7 +100,8 @@ struct CatalogView: View {
         presentToast(
           ToastValue(
             icon: Image(systemName: "checkmark.circle"),
-            message: "تم حفظ التغييرات بنجاح"
+            message: "تم حفظ التغييرات بنجاح",
+            kind: .success
           ))
       }
     } header: {
@@ -75,8 +118,9 @@ struct CatalogView: View {
           ToastValue(
             icon: Image(systemName: "wifi.exclamationmark"),
             message: "You're offline.",
+            kind: .warning,
             button: ToastButton(title: "Retry") {
-              presentToast(ToastValue(icon: Image(systemName: "wifi"), message: "Back online"))
+              presentToast(ToastValue(icon: Image(systemName: "wifi"), message: "Back online", kind: .success))
             }
           ))
       }
@@ -87,7 +131,7 @@ struct CatalogView: View {
             message: "Message deleted",
             button: ToastButton(title: "Undo", color: .red) {
               presentToast(
-                ToastValue(icon: Image(systemName: "arrow.uturn.backward"), message: "Restored"))
+                ToastValue(icon: Image(systemName: "arrow.uturn.backward"), message: "Restored", kind: .success))
             }
           ))
       }
@@ -150,8 +194,8 @@ struct CatalogView: View {
           try? await presentToast(
             message: "Saving…",
             task: { try await simulateWork(seconds: 1.5, returning: "Saved") },
-            onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: $0) },
-            onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription) }
+            onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: $0, kind: .success) },
+            onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
           )
         }
       }
@@ -160,11 +204,12 @@ struct CatalogView: View {
           try? await presentToast(
             message: "Syncing…",
             task: { try await simulateWork(seconds: 1.5, returning: "Synced", fails: true) },
-            onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: $0) },
+            onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: $0, kind: .success) },
             onFailure: {
               ToastValue(
                 icon: Image(systemName: "exclamationmark.triangle.fill").foregroundStyle(.orange),
-                message: $0.localizedDescription
+                message: $0.localizedDescription,
+                kind: .error
               )
             }
           )
@@ -175,8 +220,8 @@ struct CatalogView: View {
           try? await presentToast(
             message: "Uploading large file…",
             task: { try await simulateWork(seconds: 6, returning: ()) },
-            onSuccess: { ToastValue(icon: Image(systemName: "icloud.and.arrow.up"), message: "Uploaded") },
-            onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription) }
+            onSuccess: { ToastValue(icon: Image(systemName: "icloud.and.arrow.up"), message: "Uploaded", kind: .success) },
+            onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
           )
         }
       }
@@ -192,7 +237,7 @@ struct CatalogView: View {
                 button: ToastButton(title: "Open", color: .blue) {}
               )
             },
-            onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription) }
+            onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
           )
         }
       }
@@ -203,7 +248,7 @@ struct CatalogView: View {
               message: "Counting…",
               task: { try await simulateWork(seconds: 1, returning: 42) },
               onSuccess: { ToastValue(icon: Image(systemName: "number"), message: "Counted \($0) items") },
-              onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription) }
+              onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
             )
             presentToast(ToastValue(message: "Caller received: \(count)"))
           } catch {
@@ -216,7 +261,7 @@ struct CatalogView: View {
           try? await presentToast(
             message: "Working…",
             task: { try await simulateWork(seconds: 5, returning: ()) },
-            onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: "Done") },
+            onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: "Done", kind: .success) },
             onFailure: { error in
               ToastValue(
                 icon: Image(systemName: "stop.circle"),
@@ -270,8 +315,8 @@ struct CatalogView: View {
           try? await presentToast(
             message: "Loading in parallel…",
             task: { try await simulateWork(seconds: 2, returning: ()) },
-            onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: "Parallel done") },
-            onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription) }
+            onSuccess: { ToastValue(icon: Image(systemName: "checkmark.circle"), message: "Parallel done", kind: .success) },
+            onFailure: { ToastValue(icon: Image(systemName: "xmark.circle"), message: $0.localizedDescription, kind: .error) }
           )
         }
       }

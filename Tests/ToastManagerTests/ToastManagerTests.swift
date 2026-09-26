@@ -172,4 +172,27 @@ final class ToastManagerTests: XCTestCase {
     XCTAssertEqual(manager.models.count, 1)
     XCTAssertEqual(manager.models.first?.message, "Error")
   }
+
+  func testToastKindDefaultsToInfo() {
+    XCTAssertEqual(ToastValue(message: "Test Message").kind, .info)
+    XCTAssertEqual(ToastValue(message: "Test Message", kind: .error).kind, .error)
+  }
+
+  func testLoadingToastPlaysItsResultsHaptic() async throws {
+    let manager = ToastManager()
+
+    let loading = Task {
+      try await manager.append(
+        message: "Loading...",
+        task: { try await Task.sleep(for: .seconds(0.1)) },
+        onSuccess: { ToastValue(message: "Done", kind: .success) },
+        onFailure: { _ in ToastValue(message: "Error", kind: .error) }
+      )
+    }
+    await Task.yield()
+    XCTAssertNil(manager.models.first?.kind)
+
+    try await loading.value
+    XCTAssertEqual(manager.models.first?.kind, .success)
+  }
 }

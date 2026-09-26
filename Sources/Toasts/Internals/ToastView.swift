@@ -19,6 +19,9 @@ internal struct ToastView: View {
   /// when the first exceeds the second.
   @State private var fullMessageWidth: CGFloat = 0
   @State private var shownMessageWidth: CGFloat = 0
+  /// Taps as the message starts expanding or collapsing, and again as it settles.
+  @State private var messageHaptic: MotionHaptic?
+  @State private var messageSettleTask: Task<Void, Never>?
 
   private var isMessageTruncated: Bool { fullMessageWidth > shownMessageWidth + 1 }
   private var isMessageExpandable: Bool {
@@ -51,6 +54,9 @@ internal struct ToastView: View {
       }
     }
     .font(.callout.weight(.medium))
+    .sensoryFeedback(trigger: messageHaptic) { _, haptic in
+      haptic?.sensoryFeedback
+    }
   }
 
   private var message: some View {
@@ -139,6 +145,14 @@ internal struct ToastView: View {
     }
     withAnimation(morphAnimation) {
       model.isMessageExpanded.toggle()
+    }
+    messageHaptic = model.isMessageExpanded ? .entering : .leaving
+    messageSettleTask?.cancel()
+    messageSettleTask = Task {
+      guard (try? await Task.sleep(for: .seconds(morphAnimationDuration))) != nil,
+        !model.isDismissing
+      else { return }
+      messageHaptic = .settled
     }
   }
 }
