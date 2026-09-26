@@ -67,8 +67,14 @@ internal final class ToastManager: ObservableObject {
     remove(model)
   }
 
+  /// How long the toast stays before dismissing itself, or `nil` if it stays until removed.
+  internal func dismissDelay(for model: ToastModel) -> TimeInterval? {
+    guard let duration = model.value.duration else { return nil }
+    return model.hasCollapsedMessage ? collapsedMessageDismissDelay : duration
+  }
+
   internal func startRemovalTask(for model: ToastModel) async {
-    if let duration = model.value.duration {
+    if let duration = dismissDelay(for: model) {
       do {
         try await Task.sleep(for: .seconds(duration))
         // An expanded message stays until the person collapses or dismisses it.
@@ -106,6 +112,8 @@ internal final class ToastManager: ObservableObject {
 }
 
 internal let removalAnimationDuration: Double = 0.3
+/// After an expanded message is collapsed, the toast dismisses this long after.
+internal let collapsedMessageDismissDelay: TimeInterval = 1
 /// Duration of the circle ⇄ capsule morph.
 internal let morphAnimationDuration: Double = 0.35
 internal let morphAnimation: Animation = .spring(duration: morphAnimationDuration, bounce: 0.2)

@@ -10,6 +10,8 @@ internal final class ToastModel: ObservableObject, Identifiable {
   /// A message too long for one line can be expanded to show in full; while expanded, the toast
   /// stays until the person collapses or dismisses it.
   @Published internal var isMessageExpanded = false
+  /// Once the person has read the full message and collapsed it, the toast leaves sooner.
+  @Published internal var hasCollapsedMessage = false
   internal init(value: ToastValue) {
     self.value = value
   }

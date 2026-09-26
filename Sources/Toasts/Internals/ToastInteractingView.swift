@@ -14,7 +14,7 @@ internal struct ToastInteractingView: View {
   /// whenever any of these change (e.g. after a drag ends or the message is collapsed).
   private var dismissTimer: DismissTimer {
     DismissTimer(
-      duration: model.duration,
+      delay: manager.dismissDelay(for: model),
       isPaused: isDragging || model.isMessageExpanded
     )
   }
@@ -87,6 +87,6 @@ internal struct ToastInteractingView: View {
 }
 
 private struct DismissTimer: Equatable {
-  var duration: TimeInterval?
+  var delay: TimeInterval?
   var isPaused: Bool
 }

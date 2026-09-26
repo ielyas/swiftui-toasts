@@ -134,6 +134,9 @@ internal struct ToastView: View {
 
   private func toggleMessageExpansion() {
     guard isMessageExpandable else { return }
+    if model.isMessageExpanded {
+      model.hasCollapsedMessage = true
+    }
     withAnimation(morphAnimation) {
       model.isMessageExpanded.toggle()
     }
