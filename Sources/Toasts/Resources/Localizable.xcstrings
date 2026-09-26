@@ -1,0 +1,39 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "Dismiss" : {
+      "comment" : "VoiceOver action that dismisses the toast",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "إغلاق"
+          }
+        }
+      }
+    },
+    "Shows less" : {
+      "comment" : "VoiceOver hint for collapsing an expanded toast message",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يختصر الرسالة"
+          }
+        }
+      }
+    },
+    "Shows the full message" : {
+      "comment" : "VoiceOver hint for expanding a truncated toast message",
+      "localizations" : {
+        "ar" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "يعرض الرسالة كاملة"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

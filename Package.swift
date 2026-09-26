@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
   name: "swiftui-toasts",
+  defaultLocalization: "en",
   platforms: [.iOS(.v26)],
   products: [
     .library(
@@ -11,7 +12,8 @@ let package = Package(
   ],
   targets: [
     .target(
-      name: "Toasts"
+      name: "Toasts",
+      resources: [.process("Resources")]
     ),
     .testTarget(
       name: "ToastManagerTests",
