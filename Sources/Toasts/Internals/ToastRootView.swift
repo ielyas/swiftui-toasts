@@ -32,17 +32,21 @@ internal struct ToastRootView: View {
       .spring(duration: removalAnimationDuration),
       value: Tuple(count: manager.models.count, isAppeared: manager.isAppeared)
     )
-    .padding()
-    .padding(manager.safeAreaInsets)
+    .padding(.horizontal)
+    .padding(.vertical, 8)
+    // Top toasts sit just below the device's safe area, under the status bar or Dynamic Island.
+    // Bottom toasts follow the insets the safe-area observers report, so they clear the tab bar
+    // and rise above the keyboard.
+    .padding(isTop ? EdgeInsets() : manager.safeAreaInsets)
     .animation(.spring(duration: removalAnimationDuration), value: manager.safeAreaInsets)
-    .ignoresSafeArea()
+    .ignoresSafeArea(edges: isTop ? [] : .all)
   }
 
   private func transition(isTop: Bool) -> AnyTransition {
     if reduceMotion { return .opacity }
     return .modifier(
-      active: TransformModifier(yOffset: isTop ? -96 : 96, scale: 0.5, opacity: 0.0),
-      identity: TransformModifier(yOffset: 0, scale: 1.0, opacity: 1.0)
+      active: TransformModifier(progress: 1, yOffset: isTop ? -96 : 96, scale: 0.5),
+      identity: TransformModifier(progress: 0, yOffset: isTop ? -96 : 96, scale: 0.5)
     )
   }
 }

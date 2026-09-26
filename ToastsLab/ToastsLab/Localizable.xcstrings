@@ -1749,12 +1749,12 @@
         }
       }
     },
-    "The observer on each tab reports the tab bar and navigation bar insets, so toasts avoid them. Turn it off to compare." : {
+    "The observer on each tab reports the tab bar inset, so bottom toasts avoid it. Top toasts ignore it. Turn it off to compare." : {
       "localizations" : {
         "ar" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "يرصد المراقب في كل تبويب حدود شريط التبويبات وشريط التنقل، فتتجنبها الإشعارات. أوقفه للمقارنة."
+            "value" : "يرصد المراقب في كل تبويب حد شريط التبويبات، فتتجنبه الإشعارات السفلية، وتتجاهله العلوية. أوقفه للمقارنة."
           }
         }
       }
