@@ -32,7 +32,7 @@ Then add the `Toasts` product to your target.
 
 - Easy-to-use toast notifications
 - Liquid Glass capsules that blur and reflect the content behind them
-- Action buttons as their own glass capsule (no glass on glass) that morph out of the toast
+- Action buttons inside the toast, so each toast is one piece of glass
 - Support for custom icons, messages, and buttons
 - Long messages get a chevron to expand the toast and read them in full; an expanded toast stays until it's collapsed
   or swiped away
@@ -149,11 +149,12 @@ Toasts follow Apple's [Liquid Glass guidance](https://developer.apple.com/docume
 - Each toast is a capsule with `.glassEffect(.regular.interactive())`, so it reacts to touch while you swipe it away.
 - A toast slides in as a glass circle (showing its icon), then expands into the full capsule. When it's dismissed, by
   timer, swipe, close button, or `dismissToast`, it collapses back into the circle before leaving. With Reduce Motion on, toasts simply fade.
-- An action button is a separate glass capsule beside the message, never glass nested inside glass.
-- Each toast has its own `GlassEffectContainer` with a `glassEffectID` per capsule, so when a loading toast resolves
-  into one with a button, the button morphs out of that toast. New toasts use the `.materialize` transition, so they
-  appear in place instead of morphing out of neighbouring toasts.
-- Glass stays untinted. `ToastButton.color` colors the button's label, which keeps tint for meaning.
+- The action button is a small capsule inside the toast, filled with a translucent tint of its color rather than glass,
+  so glass is never nested inside glass. The close button sits in a matching untinted circle. When a loading toast
+  resolves into one with a button, the capsule widens and the button fades in.
+- Each toast has its own `GlassEffectContainer`, and new toasts use the `.materialize` transition, so they appear in
+  place instead of morphing out of neighbouring toasts.
+- Glass stays untinted. `ToastButton.color` colors the button's label and its capsule, which keeps tint for meaning.
 - The loading indicator is the system `ProgressView`.
 
 ## Customization
