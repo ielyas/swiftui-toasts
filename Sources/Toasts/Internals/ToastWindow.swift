@@ -98,7 +98,8 @@ internal struct ToastWindowPresenter<Content: View>: UIViewRepresentable {
       } else {
         let hostingController = UIHostingController(rootView: content)
         hostingController.view.backgroundColor = .clear
-        hostingController.safeAreaRegions = []
+        // The device's safe area, which top toasts sit below; the keyboard is left out.
+        hostingController.safeAreaRegions = .container
         toastWindow.rootViewController = hostingController
       }
       toastWindow.isHidden = false

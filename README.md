@@ -22,7 +22,7 @@ Add the package in Xcode (**File → Add Package Dependencies…**) or in `Packa
 
 ```swift
 dependencies: [
-  .package(url: "https://github.com/ielyas/swiftui-toasts.git", from: "2.1.0")
+  .package(url: "https://github.com/ielyas/swiftui-toasts.git", from: "3.0.0")
 ]
 ```
 
@@ -57,11 +57,14 @@ struct MyApp: App {
   var body: some Scene {
     WindowGroup {
       ContentView()
-        .installToast(position: .bottom)
+        .installToast()
     }
   }
 }
 ```
+
+Toasts appear at the top, just below the status bar or Dynamic Island. Pass `position: .bottom` to show them at the
+bottom instead.
 
 2. Present a toast:
 
@@ -180,7 +183,7 @@ let toast = ToastValue(
 
 ## Custom SafeArea Handling
 
-If you need to manually control the safe area insets for toasts (e.g., in a custom view hierarchy or when using multiple tabs), you can use the `addToastSafeAreaObserver` modifier:
+Top toasts always sit just below the device's safe area. Bottom toasts stay clear of the safe area insets that views report, so if you need to control them manually (e.g., in a custom view hierarchy or when using multiple tabs), use the `addToastSafeAreaObserver` modifier:
 
 ```swift
 struct ContentView: View {

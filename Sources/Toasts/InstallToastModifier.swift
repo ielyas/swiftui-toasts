@@ -7,9 +7,9 @@ extension View {
   /// notifications in all child views. Child views can then present toasts using the
   /// `presentToast` environment value.
   ///
-  /// - Parameter position: The vertical position where toasts will appear. Default is `.bottom`.
+  /// - Parameter position: The vertical position where toasts will appear. Default is `.top`.
   /// - Returns: A view with toast presentation capability.
-  public func installToast(position: ToastPosition = .bottom) -> some View {
+  public func installToast(position: ToastPosition = .top) -> some View {
     self.modifier(InstallToastModifier(position: position))
   }
 }
@@ -50,9 +50,9 @@ private struct InstallToastView: View {
 }
 
 extension View {
-  /// Adds a notifier for safe area insets that the toast system can use for proper positioning.
+  /// Reports this view's safe area insets, so bottom toasts clear its tab bar, toolbar, and keyboard.
   ///
-  /// This is an internal helper method used by the toast system.
+  /// Top toasts ignore it and always sit just below the device's safe area.
   public func addToastSafeAreaObserver() -> some View {
     self.background {
       GeometryReader { geometry in

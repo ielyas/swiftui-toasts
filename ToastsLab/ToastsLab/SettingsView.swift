@@ -44,7 +44,7 @@ struct SettingsView: View {
           Text("Safe area")
         } footer: {
           Text(
-            "The observer on each tab reports the tab bar and navigation bar insets, so toasts avoid them. Turn it off to compare."
+            "The observer on each tab reports the tab bar inset, so bottom toasts avoid it. Top toasts ignore it. Turn it off to compare."
           )
         }
 
