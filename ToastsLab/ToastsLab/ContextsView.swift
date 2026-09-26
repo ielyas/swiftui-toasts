@@ -42,7 +42,7 @@ struct ContextsView: View {
               presentToast(
                 ToastValue(
                   icon: Image(systemName: "keyboard"),
-                  message: text.isEmpty ? "Empty message" : text
+                  message: text.isEmpty ? String(localized: "Empty message") : text
                 ))
               isFieldFocused = true
             }

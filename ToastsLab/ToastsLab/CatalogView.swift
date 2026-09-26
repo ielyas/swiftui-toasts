@@ -318,7 +318,7 @@ struct CatalogView: View {
             onFailure: { error in
               ToastValue(
                 icon: Image(systemName: "stop.circle"),
-                message: error is CancellationError ? "Cancelled" : error.localizedDescription
+                message: error is CancellationError ? String(localized: "Cancelled") : error.localizedDescription
               )
             }
           )
