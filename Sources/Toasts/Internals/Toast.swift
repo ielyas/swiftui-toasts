@@ -3,6 +3,7 @@ import Foundation
 @MainActor
 @dynamicMemberLookup
 internal final class ToastModel: ObservableObject, Identifiable {
+  internal let id = ToastID()
   @Published internal var value: ToastValue
   /// A toast enters as a glass circle and expands into its full capsule; it collapses back before leaving.
   @Published internal var isExpanded = false

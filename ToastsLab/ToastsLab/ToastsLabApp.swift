@@ -53,6 +53,7 @@ private struct AutoplayModifier: ViewModifier {
         ToastValue(
           icon: Image(systemName: "doc.text"),
           message: "This is a very long toast message that will certainly not fit on a single line of the screen.",
+          showsDismissButton: true,
           duration: 10
         ))
       presentToast(ToastValue(icon: Image(systemName: "bell"), message: "You have a new notification.", duration: 10))

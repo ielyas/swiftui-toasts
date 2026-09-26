@@ -71,7 +71,9 @@ internal struct ToastInteractingView: View {
 
   @MainActor
   private var main: some View {
-    ToastView(model: model)
+    ToastView(model: model) {
+      Task { await manager.dismiss(model) }
+    }
       // Measured inside the offset, so the frame follows the toast while it's dragged.
       .onGeometryChange(for: CGRect.self, of: { $0.frame(in: .global) }) { frame in
         manager.setFrame(frame, for: model)

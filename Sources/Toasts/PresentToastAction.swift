@@ -18,8 +18,10 @@ public struct PresentToastAction {
   /// Presents a toast with the specified configuration.
   ///
   /// - Parameter toast: The toast configuration to display.
+  /// - Returns: The toast's ID, which `dismissToast` takes to dismiss it early.
   @MainActor
-  public func callAsFunction(_ toast: ToastValue) {
+  @discardableResult
+  public func callAsFunction(_ toast: ToastValue) -> ToastID {
     #if DEBUG
       if manager == nil {
         print(
@@ -27,7 +29,7 @@ public struct PresentToastAction {
         )
       }
     #endif
-    manager?.append(toast)
+    return manager?.append(toast).id ?? ToastID()
   }
 
   /// Presents a loading toast that automatically updates based on the result of an asynchronous task.

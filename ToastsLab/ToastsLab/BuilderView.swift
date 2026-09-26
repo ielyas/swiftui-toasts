@@ -11,6 +11,7 @@ struct BuilderView: View {
   @State private var message = "Hello from the builder"
   @State private var kind: ToastKind = .info
   @State private var hasButton = false
+  @State private var showsDismissButton = false
   @State private var buttonTitle = "Undo"
   @State private var buttonColor: Color = .red
   @State private var duration: Double = 3
@@ -41,6 +42,7 @@ struct BuilderView: View {
           Text("Decides the haptic played as the toast appears.")
         }
         buttonSection
+        dismissSection
         durationSection
         loadingSection
         Section {
@@ -82,6 +84,12 @@ struct BuilderView: View {
         TextField("Title", text: $buttonTitle)
         ColorPicker("Color", selection: $buttonColor)
       }
+    }
+  }
+
+  private var dismissSection: some View {
+    Section("Dismissing") {
+      Toggle("Close button", isOn: $showsDismissButton)
     }
   }
 
@@ -135,7 +143,7 @@ struct BuilderView: View {
   }
 
   private func present() {
-    let toast = ToastValue(icon: icon, message: message, kind: kind, button: button, duration: duration)
+    let toast = ToastValue(icon: icon, message: message, kind: kind, button: button, showsDismissButton: showsDismissButton, duration: duration)
     guard isLoading else {
       presentToast(toast)
       return

@@ -4,6 +4,7 @@ import Toasts
 /// One-tap presets that cover every `ToastValue` variation and the loading API.
 struct CatalogView: View {
   @Environment(\.presentToast) private var presentToast
+  @Environment(\.dismissToast) private var dismissToast
 
   var body: some View {
     NavigationStack {
@@ -11,6 +12,7 @@ struct CatalogView: View {
         kindSection
         contentSection
         buttonSection
+        dismissSection
         durationSection
         loadingSection
         stackingSection
@@ -154,6 +156,56 @@ struct CatalogView: View {
       Text("Buttons")
     } footer: {
       Text("Tapping a button runs its action but does not dismiss the toast.")
+    }
+  }
+
+  // MARK: - Dismissing
+
+  private var dismissSection: some View {
+    Section {
+      DemoRow(title: "Close button", detail: "Inside the toast", systemImage: "xmark.circle") {
+        presentToast(
+          ToastValue(
+            icon: Image(systemName: "bell"),
+            message: "Tap ✕ to dismiss.",
+            showsDismissButton: true,
+            duration: 10
+          ))
+      }
+      DemoRow(title: "Close button with action", detail: "Alongside a button", systemImage: "rectangle.and.xmark") {
+        presentToast(
+          ToastValue(
+            icon: Image(systemName: "trash"),
+            message: "Message deleted",
+            button: ToastButton(title: "Undo", color: .red) {},
+            showsDismissButton: true,
+            duration: 10
+          ))
+      }
+      DemoRow(title: "Close button, long message", detail: "Expandable and dismissible", systemImage: "text.badge.xmark") {
+        presentToast(
+          ToastValue(
+            icon: Image(systemName: "doc.text"),
+            message:
+              "This is a very long toast message that will certainly not fit on a single line of the screen.",
+            showsDismissButton: true,
+            duration: 10
+          ))
+      }
+      DemoRow(title: "Dismiss from code", detail: "Shows for 10 s, dismissed after 1.5 s", systemImage: "timer") {
+        let id = presentToast(ToastValue(icon: Image(systemName: "timer"), message: "Dismissing soon…", duration: 10))
+        Task {
+          try? await Task.sleep(for: .seconds(1.5))
+          dismissToast(id)
+        }
+      }
+      DemoRow(title: "Dismiss all", detail: "Every toast, loading ones included", systemImage: "xmark.rectangle") {
+        dismissToast()
+      }
+    } header: {
+      Text("Dismissing")
+    } footer: {
+      Text("The close button is opt-in with showsDismissButton. dismissToast takes the ID presentToast returns, or no ID to dismiss everything.")
     }
   }
 

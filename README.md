@@ -23,7 +23,7 @@ A toast notification library for SwiftUI, built entirely on **Liquid Glass**.
 - Adapts automatically to light and dark mode, Reduce Transparency, and Increase Contrast
 - Dynamic Type and Reduce Motion support
 - Haptic feedback for info, success, warning, and error toasts, timed with the toast's appearance
-- Slide gesture to dismiss
+- Slide gesture to dismiss, an optional close button, and `dismissToast` to dismiss from code
 - Loading state interface with async/await
 - Full VoiceOver compatibility for inclusive user experience
 
@@ -77,6 +77,29 @@ presentToast(
   }
 )
 ```
+
+## Dismissing
+
+A toast can show a close button inside it. It's off by default:
+
+```swift
+presentToast(ToastValue(message: "Tap ✕ to dismiss.", showsDismissButton: true))
+```
+
+To dismiss from code, keep the ID `presentToast` returns and pass it to `dismissToast`, or call `dismissToast()` with
+no ID to dismiss every toast, loading ones included:
+
+```swift
+@Environment(\.presentToast) var presentToast
+@Environment(\.dismissToast) var dismissToast
+
+let id = presentToast(ToastValue(message: "Syncing…", duration: 10))
+// Later
+dismissToast(id)
+```
+
+A dismissed toast collapses back into its circle and leaves, just as when its time runs out. With VoiceOver, the close
+button is the toast's Dismiss action, and the escape gesture also dismisses it.
 
 ## Haptics
 

@@ -23,6 +23,7 @@ private struct InstallToastModifier: ViewModifier {
         \.presentToast,
         PresentToastAction(manager: manager)
       )
+      .environment(\.dismissToast, DismissToastAction(manager: manager))
       .background {
         InstallToastView(manager: manager)
       }

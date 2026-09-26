@@ -195,4 +195,39 @@ final class ToastManagerTests: XCTestCase {
     try await loading.value
     XCTAssertEqual(manager.models.first?.kind, .success)
   }
+
+  func testPresentReturnsDismissibleID() async {
+    let manager = ToastManager()
+    let presentToast = PresentToastAction(manager: manager)
+
+    let id = presentToast(ToastValue(message: "First"))
+    presentToast(ToastValue(message: "Second"))
+    await manager.dismiss(id)
+
+    XCTAssertEqual(manager.models.map(\.message), ["Second"])
+  }
+
+  func testDismissingUnknownIDDoesNothing() async {
+    let manager = ToastManager()
+    manager.append(ToastValue(message: "Test Message"))
+
+    await manager.dismiss(ToastID())
+
+    XCTAssertEqual(manager.models.count, 1)
+  }
+
+  func testDismissAllIncludesLoadingToasts() async {
+    let manager = ToastManager()
+    manager.append(ToastValue(message: "First"))
+    manager.append(ToastValue(message: "Loading", duration: nil))
+
+    await manager.dismissAll()
+
+    XCTAssertTrue(manager.models.isEmpty)
+  }
+
+  func testDismissButtonIsOptIn() {
+    XCTAssertFalse(ToastValue(message: "Test Message").showsDismissButton)
+    XCTAssertTrue(ToastValue(message: "Test Message", showsDismissButton: true).showsDismissButton)
+  }
 }

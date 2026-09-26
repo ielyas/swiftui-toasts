@@ -12,8 +12,11 @@ import SwiftUI
 ///
 /// A message too long for one line shows a chevron, and tapping the toast expands it to show the
 /// message in full.
+///
+/// A toast can also show a close button, inside the message capsule rather than as glass of its own.
 internal struct ToastView: View {
   @ObservedObject var model: ToastModel
+  var onDismiss: () -> Void = {}
   @Namespace private var namespace
   /// The message's full one-line width, and the width it's actually given; the chevron shows only
   /// when the first exceeds the second.
@@ -68,11 +71,11 @@ internal struct ToastView: View {
       if model.isExpanded {
         messageText
           .id(model.message)
-          .transition(
-            .asymmetric(
-              insertion: .opacity.animation(.spring(duration: 0.3).delay(0.15)),
-              removal: .opacity.animation(.spring(duration: 0.15))
-            ))
+          .transition(contentTransition)
+        if model.showsDismissButton {
+          dismissButton
+            .transition(contentTransition)
+        }
       }
     }
     // Collapsed, the capsule is a circle: no padding, and at least as wide as it is tall.
@@ -92,10 +95,43 @@ internal struct ToastView: View {
     .accessibilityAction {
       toggleMessageExpansion()
     }
+    .accessibilityActions {
+      if model.showsDismissButton {
+        Button("Dismiss", action: onDismiss)
+      }
+    }
+    .accessibilityAction(.escape) {
+      if model.showsDismissButton { onDismiss() }
+    }
     .glassEffect(.regular.interactive(), in: messageShape)
     .glassEffectID(ToastGlassID.message, in: namespace)
     // A new toast appears in place rather than morphing out of other glass.
     .glassEffectTransition(.materialize)
+  }
+
+  /// Content fades in once the circle has started expanding, and out before it collapses.
+  private var contentTransition: AnyTransition {
+    .asymmetric(
+      insertion: .opacity.animation(.spring(duration: 0.3).delay(0.15)),
+      removal: .opacity.animation(.spring(duration: 0.15))
+    )
+  }
+
+  /// A close button at the trailing end of the message. VoiceOver reaches it as the toast's
+  /// Dismiss action instead.
+  private var dismissButton: some View {
+    Button(action: onDismiss) {
+      Image(systemName: "xmark")
+        .font(.footnote.weight(.semibold))
+        .foregroundStyle(.secondary)
+        .frame(width: iconSize, height: iconSize)
+        // A comfortable touch target around the small glyph, without widening the toast.
+        .padding(12)
+        .contentShape(.rect)
+        .padding(-12)
+    }
+    .buttonStyle(.plain)
+    .accessibilityHidden(true)
   }
 
   @ViewBuilder
@@ -218,6 +254,7 @@ private enum ToastGlassID: Hashable, Sendable {
       button: .init(title: "Action", action: {})
     ),
     .init(icon: Image(systemName: "info.circle"), message: "This is a toast message"),
+    .init(icon: Image(systemName: "info.circle"), message: "Dismissible toast", showsDismissButton: true),
     .init(message: "This is a toast message"),
     .init(message: "Copied"),
   ]

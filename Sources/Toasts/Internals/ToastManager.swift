@@ -67,6 +67,21 @@ internal final class ToastManager: ObservableObject {
     remove(model)
   }
 
+  /// Dismisses the toast with the given ID, if it's still showing.
+  internal func dismiss(_ id: ToastID) async {
+    guard let model = models.first(where: { $0.id == id }) else { return }
+    await dismiss(model)
+  }
+
+  /// Dismisses every toast, together.
+  internal func dismissAll() async {
+    await withTaskGroup(of: Void.self) { group in
+      for model in models {
+        group.addTask { await self.dismiss(model) }
+      }
+    }
+  }
+
   /// How long the toast stays before dismissing itself, or `nil` if it stays until removed.
   internal func dismissDelay(for model: ToastModel) -> TimeInterval? {
     guard let duration = model.value.duration else { return nil }
