@@ -17,6 +17,22 @@ struct RootView: View {
   @Environment(LabSettings.self) private var settings
 
   var body: some View {
+    Group {
+      if LaunchOptions.isShowcase {
+        // A blank screen, so recordings show only the toasts.
+        Color(.systemBackground).ignoresSafeArea()
+      } else {
+        tabs
+      }
+    }
+    .modifier(AutoplayModifier())
+    .installToast(position: settings.position)
+    .preferredColorScheme(LaunchOptions.colorScheme ?? settings.appearance.colorScheme)
+    .environment(\.layoutDirection, settings.rightToLeft ? .rightToLeft : .leftToRight)
+    .dynamicTypeSize(settings.dynamicTypeSize)
+  }
+
+  private var tabs: some View {
     TabView {
       Tab("Catalog", systemImage: "square.grid.2x2") {
         CatalogView()
@@ -31,22 +47,29 @@ struct RootView: View {
         SettingsView()
       }
     }
-    .modifier(AutoplayModifier())
-    .installToast(position: settings.position)
-    .preferredColorScheme(settings.appearance.colorScheme)
-    .environment(\.layoutDirection, settings.rightToLeft ? .rightToLeft : .leftToRight)
-    .dynamicTypeSize(settings.dynamicTypeSize)
   }
 }
 
-/// Launch with `-autoplay` to present a sample of every toast shape without tapping,
+/// Launch arguments for recording the README media:
+/// - `-autoplay` presents a sample of every toast shape without tapping.
+/// - `-showcase` does the same over a blank screen.
+/// - `-light` / `-dark` force the appearance.
+private enum LaunchOptions {
+  static let arguments = ProcessInfo.processInfo.arguments
+  static let isShowcase = arguments.contains("-showcase")
+  static let isAutoplay = isShowcase || arguments.contains("-autoplay")
+  static let colorScheme: ColorScheme? =
+    arguments.contains("-dark") ? .dark : arguments.contains("-light") ? .light : nil
+}
+
+/// Presents a sample of every toast shape when launched with `-autoplay` or `-showcase`,
 /// e.g. `xcrun simctl launch <device> <bundle-id> -autoplay`.
 private struct AutoplayModifier: ViewModifier {
   @Environment(\.presentToast) private var presentToast
 
   func body(content: Content) -> some View {
     content.task {
-      guard ProcessInfo.processInfo.arguments.contains("-autoplay") else { return }
+      guard LaunchOptions.isAutoplay else { return }
       try? await Task.sleep(for: .seconds(1))
       presentToast(ToastValue(message: "Message only", duration: 10))
       presentToast(

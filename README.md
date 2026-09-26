@@ -6,8 +6,14 @@ A toast notification library for SwiftUI, built entirely on **Liquid Glass**.
 > background and legacy OS support in favor of the system Liquid Glass material. It requires iOS 26 or later.
 
 <p>
-  <img src="docs/demo.gif" width="300" alt="Toasts entering as glass circles, expanding into capsules, then collapsing and leaving">
-  <img src="docs/toasts.png" width="300" alt="Several Liquid Glass toasts, including a long message with a close button and toasts with action buttons">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/demo-dark.gif">
+    <img src="docs/demo-light.gif" width="300" alt="Toasts entering as glass circles, expanding into capsules, then collapsing and leaving">
+  </picture>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/toasts-dark.png">
+    <img src="docs/toasts-light.png" width="300" alt="Several Liquid Glass toasts, including a long message with a close button and toasts with action buttons">
+  </picture>
 </p>
 
 ## Installation
@@ -74,7 +80,7 @@ Button("Show Toast") {
 ## Advanced Usage
 
 ```swift
-presentToast(
+try await presentToast(
   message: "Loading...",
   task: {
     // Handle loading task
@@ -142,7 +148,7 @@ Toasts follow Apple's [Liquid Glass guidance](https://developer.apple.com/docume
 
 - Each toast is a capsule with `.glassEffect(.regular.interactive())`, so it reacts to touch while you swipe it away.
 - A toast slides in as a glass circle (showing its icon), then expands into the full capsule. When it's dismissed, by
-  timer or swipe, it collapses back into the circle before leaving. With Reduce Motion on, toasts simply fade.
+  timer, swipe, close button, or `dismissToast`, it collapses back into the circle before leaving. With Reduce Motion on, toasts simply fade.
 - An action button is a separate glass capsule beside the message, never glass nested inside glass.
 - Each toast has its own `GlassEffectContainer` with a `glassEffectID` per capsule, so when a loading toast resolves
   into one with a button, the button morphs out of that toast. New toasts use the `.materialize` transition, so they
@@ -216,4 +222,11 @@ cd ToastsLab && xcodegen generate && open ToastsLab.xcodeproj
 To run it on a device, copy `ToastsLab/Local.xcconfig.example` to `ToastsLab/Local.xcconfig` and fill in your team
 and a bundle ID you can sign; it's gitignored.
 
-Launch with the `-autoplay` argument to present a sample of every toast shape without tapping.
+Launch with the `-autoplay` argument to present a sample of every toast shape without tapping. `-showcase` does the same over a blank screen, and `-light` or `-dark` forces the appearance; the README media
+is recorded that way.
+
+## License
+
+MIT. See [LICENSE.md](LICENSE.md).
+
+Based on [swiftui-toasts](https://github.com/sunghyun-k/swiftui-toasts) by Sunghyun Kim.
