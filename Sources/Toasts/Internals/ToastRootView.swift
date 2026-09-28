@@ -35,8 +35,11 @@ internal struct ToastRootView: View {
       value: Tuple(count: manager.models.count, isAppeared: manager.isAppeared)
     )
     .padding(.horizontal)
-    .padding(.vertical, 8)
-    // Top toasts sit just below the device's safe area, under the status bar or Dynamic Island.
+    // A one-line top toast centers on the navigation bar's buttons, which also start at the safe
+    // area; larger text grows it downward from there.
+    .padding(.top, isTop ? (navigationBarButtonHeight - toastHeight) / 2 : 8)
+    .padding(.bottom, 8)
+    // Top toasts sit in the device's safe area, under the status bar or Dynamic Island.
     // Bottom toasts follow the insets the safe-area observers report, so they clear the tab bar
     // and rise above the keyboard.
     .padding(isTop ? EdgeInsets() : manager.safeAreaInsets)
@@ -54,6 +57,8 @@ internal struct ToastRootView: View {
 }
 
 private let maxToastWidth: CGFloat = 500
+private let navigationBarButtonHeight: CGFloat = 44
+private let toastHeight: CGFloat = 48
 
 private struct Tuple: Equatable {
   var count: Int
