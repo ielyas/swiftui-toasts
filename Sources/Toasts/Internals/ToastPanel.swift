@@ -103,7 +103,10 @@ internal struct ToastWindowPresenter<Content: View>: NSViewRepresentable {
     let environment: EnvironmentValues
 
     var body: some View {
-      content.environment(\.self, environment)
+      content
+        .environment(\.self, environment)
+        // Fills the panel, so the toasts center in the window rather than the panel shrinking to them.
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
   }
 
@@ -193,7 +196,13 @@ internal struct ToastWindowPresenter<Content: View>: NSViewRepresentable {
         let trackingArea = Self.trackingArea(owner: mouseTracker)
         hostingView.addTrackingArea(trackingArea)
         panelTrackingArea = trackingArea
-        panel.contentView = hostingView
+        // A plain container is the panel's content view, with the hosting view filling it. As the
+        // content view itself, the hosting view would size the panel to the toasts' own width.
+        let container = NSView()
+        hostingView.frame = container.bounds
+        hostingView.autoresizingMask = [.width, .height]
+        container.addSubview(hostingView)
+        panel.contentView = container
         self.hostingView = hostingView
       }
       layoutPanel()
