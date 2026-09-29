@@ -57,8 +57,11 @@ public struct ToastValue {
 
 /// Represents an action button that can be displayed within a toast.
 public struct ToastButton {
-  /// The text to display on the button.
+  /// The text to display on the button. With a `systemImage`, VoiceOver reads it instead.
   public var title: String
+
+  /// An SF Symbol shown instead of the title, in a small tinted circle. `nil` shows the title.
+  public var systemImage: String?
 
   /// The color of the button text.
   public var color: Color
@@ -69,15 +72,18 @@ public struct ToastButton {
   /// Creates a new toast button with the specified title, color, and action.
   ///
   /// - Parameters:
-  ///   - title: The text to display on the button.
+  ///   - title: The text to display on the button, or its VoiceOver label with a `systemImage`.
+  ///   - systemImage: An SF Symbol to show instead of the title. Default is `nil`.
   ///   - color: The color of the button text. Default is `.primary`.
   ///   - action: The closure to execute when the button is tapped.
   public init(
     title: String,
+    systemImage: String? = nil,
     color: Color = .primary,
     action: @escaping () -> Void
   ) {
     self.title = title
+    self.systemImage = systemImage
     self.color = color
     self.action = action
   }

@@ -128,17 +128,15 @@ internal struct ToastView: View {
     )
   }
 
-  /// The action button, a small capsule tinted with the button's color inside the toast. It's a
-  /// translucent fill rather than glass, so glass is never layered on glass. Its title never
-  /// truncates; the message gives way instead.
+  /// The action button, a small capsule tinted with the button's color inside the toast — or,
+  /// with a `systemImage`, a circle the size of the dismiss button. It's a translucent fill
+  /// rather than glass, so glass is never layered on glass. Its title never truncates; the
+  /// message gives way instead.
   private func actionButton(_ button: ToastButton) -> some View {
     Button(action: button.action) {
-      Text(button.title)
+      actionLabel(button)
         .fontWeight(.semibold)
         .foregroundStyle(button.color)
-        .fixedSize()
-        .padding(.horizontal, 12)
-        .frame(minHeight: buttonHeight)
         .background(button.color.opacity(0.15), in: .capsule)
         // A touch target as tall as the toast, without making it taller.
         .padding(.vertical, buttonInset)
@@ -149,6 +147,21 @@ internal struct ToastView: View {
     // Centers the capsule on the message's first line, which the icon's frame matches.
     .alignmentGuide(.top) { $0[.top] + ($0.height - iconSize) / 2 }
     .padding(.leading, 2)
+  }
+
+  @ViewBuilder
+  private func actionLabel(_ button: ToastButton) -> some View {
+    if let systemImage = button.systemImage {
+      Image(systemName: systemImage)
+        .font(.footnote.weight(.semibold))
+        .frame(width: buttonHeight, height: buttonHeight)
+        .accessibilityLabel(Text(button.title))
+    } else {
+      Text(button.title)
+        .fixedSize()
+        .padding(.horizontal, 12)
+        .frame(minHeight: buttonHeight)
+    }
   }
 
   /// A close button in a small circle at the trailing end of the toast, filled like the action
