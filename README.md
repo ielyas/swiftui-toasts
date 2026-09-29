@@ -213,7 +213,7 @@ This modifier helps the toast system correctly detect and respond to safe area c
 - **iOS and iPadOS**: toasts show in their own window above the app, so they appear over sheets and full-screen covers.
 - **tvOS**: toasts are message-only. They never take focus: they have no action button, no close button and no swipe,
   and tapping does nothing, so the remote keeps driving the app while a toast is up. A `button` or
-  `showsDismissButton` is ignored.
+  `showsDismissButton` is ignored. Since nothing can expand a long message, it wraps and shows in full.
 - **macOS**: toasts float in a borderless child panel over the window's content, below its toolbar. The panel moves
   and resizes with the window, shows over its sheets, and never becomes key or main. Clicks pass through to the window
   everywhere except on a toast.

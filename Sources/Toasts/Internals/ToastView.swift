@@ -78,7 +78,7 @@ internal struct ToastView: View {
     // Collapsed, the capsule is a circle: no padding, and at least as wide as it is tall.
     .padding(.leading, model.isExpanded ? 16 : 0)
     .padding(.trailing, model.isExpanded ? (endsWithButton ? buttonInset : 16) : 0)
-    .padding(.vertical, model.isMessageExpanded ? 14 : 0)
+    .padding(.vertical, verticalPadding)
     .frame(minWidth: minHeight, minHeight: minHeight)
     // Keeps fading text from spilling outside the capsule while it shrinks.
     .clipShape(messageShape)
@@ -199,8 +199,28 @@ internal struct ToastView: View {
     .accessibilityHidden(true)
   }
 
+  private var verticalPadding: CGFloat {
+    #if os(tvOS)
+      // The message always wraps on tvOS; this keeps a second line off the edges.
+      model.isExpanded ? 6 : 0
+    #else
+      model.isMessageExpanded ? 14 : 0
+    #endif
+  }
+
   @ViewBuilder
   private var messageText: some View {
+    #if os(tvOS)
+      // Nothing on tvOS can expand a truncated message, so it's always shown in full.
+      Text(model.message)
+        .fixedSize(horizontal: false, vertical: true)
+    #else
+      truncatingMessageText
+    #endif
+  }
+
+  @ViewBuilder
+  private var truncatingMessageText: some View {
     if model.isMessageExpanded {
       HStack(alignment: .top, spacing: 6) {
         Text(model.message)

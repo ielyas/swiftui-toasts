@@ -56,7 +56,12 @@ internal struct ToastRootView: View {
   }
 }
 
-private let maxToastWidth: CGFloat = 500
+#if os(tvOS)
+  /// A television is viewed from across the room, and a tvOS message is always shown in full.
+  private let maxToastWidth: CGFloat = 1000
+#else
+  private let maxToastWidth: CGFloat = 500
+#endif
 private let navigationBarButtonHeight: CGFloat = 44
 private let toastHeight: CGFloat = 48
 
