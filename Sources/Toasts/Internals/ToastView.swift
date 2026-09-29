@@ -27,8 +27,16 @@ internal struct ToastView: View {
     model.isExpanded && (isMessageTruncated || model.isMessageExpanded)
   }
 
-  @ScaledMetric(relativeTo: .callout) private var iconSize: CGFloat = 20
-  @ScaledMetric(relativeTo: .callout) private var minHeight: CGFloat = 48
+  #if os(tvOS)
+    // tvOS text is about twice iOS's (callout is 31 pt on a 41 pt line), and nothing scales these
+    // with it. The icon's frame is one line tall, as on iOS, so the icon and the loading indicator
+    // (40 pt) center on the message's first line instead of hanging above it.
+    @ScaledMetric(relativeTo: .callout) private var iconSize: CGFloat = 41
+    @ScaledMetric(relativeTo: .callout) private var minHeight: CGFloat = 64
+  #else
+    @ScaledMetric(relativeTo: .callout) private var iconSize: CGFloat = 20
+    @ScaledMetric(relativeTo: .callout) private var minHeight: CGFloat = 48
+  #endif
 
   /// The height of the action button's capsule and the close button's circle.
   @ScaledMetric(relativeTo: .callout) private var buttonHeight: CGFloat = 32
@@ -201,8 +209,8 @@ internal struct ToastView: View {
 
   private var verticalPadding: CGFloat {
     #if os(tvOS)
-      // The message always wraps on tvOS; this keeps a second line off the edges.
-      model.isExpanded ? 6 : 0
+      // The message always wraps on tvOS; a wrapped message keeps the one-line inset.
+      model.isExpanded ? (minHeight - iconSize) / 2 : 0
     #else
       model.isMessageExpanded ? 14 : 0
     #endif
