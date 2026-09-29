@@ -1,3 +1,4 @@
+#if canImport(UIKit)
 import SwiftUI
 import UIKit
 
@@ -106,3 +107,4 @@ internal struct ToastWindowPresenter<Content: View>: UIViewRepresentable {
     }
   }
 }
+#endif

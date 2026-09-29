@@ -35,7 +35,13 @@ internal struct ToastView: View {
   /// How far a button sits from the toast's edge when it ends the toast; the same inset it has above
   /// and below on one line, so its shape is concentric with the toast's.
   private var buttonInset: CGFloat { (minHeight - buttonHeight) / 2 }
-  private var endsWithButton: Bool { model.button != nil || model.showsDismissButton }
+  private var endsWithButton: Bool {
+    #if os(tvOS)
+      false
+    #else
+      model.button != nil || model.showsDismissButton
+    #endif
+  }
 
   /// A capsule on one line, a circle when collapsed, and a rounded rectangle when the message wraps.
   private var messageShape: RoundedRectangle {
@@ -55,16 +61,19 @@ internal struct ToastView: View {
   private var capsule: some View {
     HStack(alignment: .top, spacing: 10) {
       message
-      if model.isExpanded {
-        if let button = model.button {
-          actionButton(button)
-            .transition(contentTransition)
+      // On tvOS a toast is message-only: a button would have to take focus to be used.
+      #if !os(tvOS)
+        if model.isExpanded {
+          if let button = model.button {
+            actionButton(button)
+              .transition(contentTransition)
+          }
+          if model.showsDismissButton {
+            dismissButton
+              .transition(contentTransition)
+          }
         }
-        if model.showsDismissButton {
-          dismissButton
-            .transition(contentTransition)
-        }
-      }
+      #endif
     }
     // Collapsed, the capsule is a circle: no padding, and at least as wide as it is tall.
     .padding(.leading, model.isExpanded ? 16 : 0)
@@ -73,10 +82,16 @@ internal struct ToastView: View {
     .frame(minWidth: minHeight, minHeight: minHeight)
     // Keeps fading text from spilling outside the capsule while it shrinks.
     .clipShape(messageShape)
-    // The whole toast, not just the chevron, expands and collapses the message.
-    .contentShape(messageShape)
-    .onTapGesture(perform: toggleMessageExpansion)
-    .glassEffect(.regular.interactive(), in: messageShape)
+    #if os(tvOS)
+      // A toast never takes focus on tvOS, so it has nothing to press and isn't interactive glass.
+      .focusable(false)
+      .glassEffect(.regular, in: messageShape)
+    #else
+      // The whole toast, not just the chevron, expands and collapses the message.
+      .contentShape(messageShape)
+      .onTapGesture(perform: toggleMessageExpansion)
+      .glassEffect(.regular.interactive(), in: messageShape)
+    #endif
     .glassEffectID(ToastGlassID.message, in: namespace)
     // A new toast appears in place rather than morphing out of other glass.
     .glassEffectTransition(.materialize)

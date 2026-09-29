@@ -82,11 +82,14 @@ internal struct ToastInteractingView: View {
         manager.setFrame(nil, for: model)
       }
       .offset(y: yOffset ?? 0)
-      // Simultaneous, so tapping the toast to expand its message never blocks swiping it away.
-      .simultaneousGesture(dragGesture)
+      #if !os(tvOS)
+        // Simultaneous, so tapping the toast to expand its message never blocks swiping it away.
+        .simultaneousGesture(dragGesture)
+      #endif
       .animation(.spring, value: isDragging)
   }
 
+  #if !os(tvOS)
   @MainActor
   private var dragGesture: some Gesture {
     DragGesture(minimumDistance: 0)
@@ -109,6 +112,7 @@ internal struct ToastInteractingView: View {
         }
       }
   }
+  #endif
 }
 
 private struct Arrival: Equatable {

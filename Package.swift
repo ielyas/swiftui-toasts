@@ -4,7 +4,7 @@ import PackageDescription
 let package = Package(
   name: "swiftui-toasts",
   defaultLocalization: "en",
-  platforms: [.iOS(.v26)],
+  platforms: [.iOS(.v26), .tvOS(.v26), .macOS(.v26)],
   products: [
     .library(
       name: "Toasts",

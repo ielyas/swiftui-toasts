@@ -3,7 +3,8 @@
 A toast notification library for SwiftUI, built entirely on **Liquid Glass**.
 
 > This is a fork of [sunghyun-k/swiftui-toasts](https://github.com/sunghyun-k/swiftui-toasts) that drops the custom
-> background and legacy OS support in favor of the system Liquid Glass material. It requires iOS 26 or later.
+> background and legacy OS support in favor of the system Liquid Glass material. It requires iOS 26, tvOS 26 or
+> macOS 26 or later.
 
 <p>
   <picture>
@@ -63,8 +64,8 @@ struct MyApp: App {
 }
 ```
 
-On iPhone, toasts appear at the top, just below the status bar or Dynamic Island. On iPad, they appear at the bottom.
-Pass `position: .top` or `position: .bottom` to use the same position everywhere.
+On iPhone and Apple TV, toasts appear at the top, just below the status bar or Dynamic Island. On iPad and Mac, they
+appear at the bottom. Pass `position: .top` or `position: .bottom` to use the same position everywhere.
 
 2. Present a toast:
 
@@ -207,9 +208,21 @@ struct Tab1View: View {
 
 This modifier helps the toast system correctly detect and respond to safe area changes, which is particularly useful in complex view hierarchies or when using TabView.
 
+## Platforms
+
+- **iOS and iPadOS**: toasts show in their own window above the app, so they appear over sheets and full-screen covers.
+- **tvOS**: toasts are message-only. They never take focus: they have no action button, no close button and no swipe,
+  and tapping does nothing, so the remote keeps driving the app while a toast is up. A `button` or
+  `showsDismissButton` is ignored.
+- **macOS**: toasts float in a borderless child panel over the window's content, below its toolbar. The panel moves
+  and resizes with the window, shows over its sheets, and never becomes key or main. Clicks pass through to the window
+  everywhere except on a toast.
+
 ## Requirements
 
 - iOS 26.0+
+- tvOS 26.0+
+- macOS 26.0+
 - Swift 6.2+
 - Xcode 26+
 
